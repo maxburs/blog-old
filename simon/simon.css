@@ -1,0 +1,161 @@
+body {
+  font-size: 0px;
+  background-color: rgb(224, 224, 224);
+}
+button {
+  cursor: pointer;
+  border-style: none;
+  outline: none;
+}
+#container {
+  margin: auto;
+  width: 500px;
+  height: 500px;
+  background-color: rgb(48, 48, 48);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0px 0px 8px black;
+}
+#btn-container {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.btn-surround {
+  position: absolute;
+  height: 212px;
+  width: 212px;
+}
+#btn-green {
+  background-color: green;
+}
+#btn-red {
+  left: 238px;
+  background-color: red;
+}
+#btn-yellow {
+  top: 238px;
+  background-color: yellow;
+}
+#btn-blue {
+  top: 238px;
+  left: 238px;
+  background-color: blue;
+}
+#center-border {
+  z-index: 1;
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: 105px;
+  left: 105px;
+  background-color: rgb(48, 48, 48);
+  border-radius: 50%;
+}
+#center {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  width: 190px;
+  height: 190px;
+  background-color: rgb(224, 224, 224);
+  border-radius: 50%;
+  text-align: center;
+}
+#throne-display {
+  padding: 0px 6px;
+  display: inline-block;
+  background-color: #5C0000;
+  vertical-align: middle;
+  border: 3px solid black;
+  border-radius: 6px;
+  font-size: 36px;
+  width: 36px;
+  height: 42px;
+  text-align: center;
+}
+.btn-wrapper {
+  display: inline-block;
+  margin: 6px;
+  vertical-align: middle;
+}
+.btn-wrapper > * {
+  margin: 3px;
+}
+#throne-start, #throne-strict, #throne-on, #throne-light{
+  box-shadow: 0px 0px 3px black;
+  display: inline-block;
+  background-color: rgb(48, 48, 48);
+  position: relative;
+}
+#throne-start, #throne-strict{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+#throne-on {
+  width: 46px;
+  height: 22px;
+  border-radius: 2px;
+  display:inline-block;
+  vertical-align: middle;
+}
+#throne-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+#btn-start, #btn-strict, #btn-on, #light {
+  position: absolute;
+}
+#light {
+  background-color: black;
+  width: 6px;
+  height: 6px;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+}
+#btn-start, #btn-strict {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  left: 4px;
+  top: 4px;
+}
+#btn-start {
+  background-color: red;
+}
+#btn-strict {
+  background-color: yellow;
+}
+#btn-on {
+  width: 40px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+  background-color: rgb(48, 48, 48);
+  padding: 0px;
+}
+#btn-on > * {
+  display: inline-block;
+  width: 20px;
+  height: 16px;
+  border-radius: 2px;
+}
+#btn-on>div:first-child {
+  background-color: black;
+}
+h1 {
+  font-size: 28px;
+  margin: 20px 0px 8px 0px;
+}
+h2 {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}

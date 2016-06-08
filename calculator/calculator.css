@@ -1,0 +1,37 @@
+.container {
+	max-width: 300px;
+	margin: auto;
+	margin-top: 100px;
+	padding: 6px;
+	font-size: 0px;
+	background-color: rgb(32, 32, 32);
+}
+#display {
+	text-align: right;
+	background-color: white;
+	padding: 2px 8px 2px 8px;
+	margin: 2px 2px 6px 2px;
+	width: 280px;
+	height: 31px;
+	font-size: 24px;
+}
+button {
+	margin: 2px;
+	width: 71px;
+	height: 75px;
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	background-color: rgb(224, 224, 224);
+	font-size: 17px;
+}
+button:hover {
+	background-color: rgb(192, 192, 192);
+}
+#emptyButton {
+	cursor: default;
+}
+#emptyButton:hover {
+	background-color: rgb(224, 224, 224);
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<link rel="stylesheet" type="text/css" href="pomodoro-clock.css">
+	<script type="text/javascript" src="pomodoro-clock.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="container">
+		<a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank" class="title">Pomodoro Clock</a>
+		<hr noshade>
+			<div class="settings-container">
+				session length
+				<br>
+				<div class="setting-controls">
+					<button type="button" onclick="changeSessionLength(-1)"><i class="icon-minus"></i></button>
+					<div id="session-length">25</div>
+					<button type="button" onclick="changeSessionLength(1)"><i class="icon-plus"></i></button>
+				</div>
+			</div>
+			<div class="settings-container">
+				break length
+				<br>
+				<div class="setting-controls">
+					<button type="button" onclick="changeBreakLength(-1)"><i class="icon-minus"></i></button>
+					<div id="break-length">5</div>
+					<button type="button" onclick="changeBreakLength(1)"><i class="icon-plus"></i></button>
+				</div>
+			</div>
+			<div class="settings-container">
+				reset
+				<br>
+				<div class="setting-controls">
+					<div id="quick-fix"></div>
+					<button type="button" onclick="reset()"><i class="icon-refresh"></i></button>
+				</div>
+			</div>
+			<hr noshade>
+			<div id="clock-container">
+				<div class="title2"><button type="button" onClick="modeChange()" id="mode">session</button> time remaining</div>
+				<button type="button" onclick="pauseToggle()" id="clock">25:00</button>
+			</div>
+	</div>
+</body>

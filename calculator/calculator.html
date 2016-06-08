@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<link rel="stylesheet" type="text/css" href="calculator.css">
+	<script type="text/javascript" src="calculator.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div id="display"></div>
+		<button type="button" onClick="clearFormula()">CE</button>
+		<button type="button" onClick="deleteLastOperation()">DEL</button>
+		<button type="button" onclick="inputPercent('%')">%</button>
+		<button type="button" onclick="inputOperator('/')">/</button>
+
+		<button type="button" onclick="inputNumber('7')">7</button>
+		<button type="button" onclick="inputNumber('8')">8</button>
+		<button type="button" onclick="inputNumber('9')">9</button>
+		<button type="button" onclick="inputOperator('*')">*</button>
+
+		<button type="button" onclick="inputNumber('4')">4</button>
+		<button type="button" onclick="inputNumber('5')">5</button>
+		<button type="button" onclick="inputNumber('6')">6</button>
+		<button type="button" onclick="inputOperator('-')">-</button>
+
+		<button type="button" onclick="inputNumber('1')">1</button>
+		<button type="button" onclick="inputNumber('2')">2</button>
+		<button type="button" onclick="inputNumber('3')">3</button>
+		<button type="button" onclick="inputOperator('+')">+</button>
+
+		<button type="button" onclick="inputDecimal()">.</button>
+		<button type="button" onclick="inputNumber(0)">0</button>
+		<button type="button" onclick="inputPreviousAns()">Ans</button>
+		<button type="button" onclick="solve()">=</button>
+	</div>
+</body>

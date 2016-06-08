@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+  <link rel="stylesheet" type="text/css" href="tic-tac-toe.css">
+  <script type="text/javascript" src="tic-tac-toe.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class="positioner">
+    <div class="container">
+      <div class="positioner">
+        <div id="overlay">
+          <span id="overlay-message">choose mark</span>
+          <br>
+          <button type="button" class="selection">X</button>
+          <button type="button" class="selection">0</button>
+        </div>
+      </div>
+      <button type="button" onClick="playerMove(0)" class="tile bottom-border right-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(1)" class="tile bottom-border left-border right-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(2)" class="tile bottom-border left-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(3)" class="tile bottom-border top-border right-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(4)" class="tile bottom-border top-border right-border left-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(5)" class="tile bottom-border top-border left-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(6)" class="tile top-border right-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(7)" class="tile top-border right-border left-border">&nbsp;</button>
+      <button type="button" onClick="playerMove(8)" class="tile top-border left-border">&nbsp;</button>
+    </div>
+  </div>
+</body>

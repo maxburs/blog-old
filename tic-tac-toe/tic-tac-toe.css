@@ -1,0 +1,67 @@
+
+body {
+  background-color: rgb(64, 64, 64);
+  font-size: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+.positioner {
+  position: absolute;
+  left: 50%;
+  visibility: hidden;
+}
+#overlay {
+  position: relative;
+  left: -50%;
+  background-color: rgb(32, 32, 32);
+  top: 70px;
+  text-align: center;
+  width: 200px;
+  z-index: 1;
+  padding: 10px 20px;
+  color: rgb(192, 192, 192);
+  visibility: visible;
+  opacity: .97;
+}
+#overlay-message {
+  font-size: 24px;
+  opacity: 1;
+}
+button {
+  outline: none;
+  display: block;
+}
+.selection {
+  cursor: pointer;
+  color: #B27200;
+  opacity: 1;
+}
+.selection:hover {
+  color: #8A5800;
+}
+.container {
+  position: relative;
+  left: -50%;
+  width: 300px;
+  visibility: visible;
+}
+.tile, .selection {
+  width: 96px;
+  height: 96px;
+  display: inline-block;
+  font-size: 90px;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+}
+.right-border {
+  border-right: 3px solid rgb(192, 192, 192);
+}
+.left-border {
+  border-left: 3px solid rgb(192, 192, 192);
+}
+.top-border {
+  border-top: 3px solid rgb(192, 192, 192);
+}
+.bottom-border {
+  border-bottom: 3px solid rgb(192, 192, 192);
+}
