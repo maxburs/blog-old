@@ -23,15 +23,29 @@
 body {
     font-family: "Roboto";
     margin: 0px;
-    padding: 8px;
+    padding: 4px;
 }
 .container {
     margin: auto;
     max-width: 800px;
 }
+#head {
+    overflow: auto;
+    text-align: center;
+}
+#head > * {
+    vertical-align: middle;
+    margin: 4px;
+}
 h1 {
     font-size: 48px;
     font-weight: bold;
+    display: inline;
+}
+#selfie {
+    border-radius: 50%;
+    height: 180px;
+    width: 180px;
 }
 #test1 {
     font-family: "RobotoCondensed";
