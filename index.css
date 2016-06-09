@@ -1,6 +1,24 @@
 @font-face {
-    src: url("Roboto-Regular.ttf");
+    src: url("Roboto-Regular.ttf") format("truetype");
     font-family: "Roboto";
+}
+@font-face {
+    src: url("Roboto-Bold.ttf") format("truetype");
+    font-family: "Roboto";
+    font-weight: bold;
+}
+@font-face {
+    src: url("RobotoCondensed-Regular.ttf") format("truetype");
+    font-family: "RobotoCondensed";
+}
+@font-face {
+    src: url("RobotoCondensed-Bold.ttf") format("truetype");
+    font-family: "RobotoCondensed";
+    font-weight: bold;
+}
+@font-face {
+    src: url("Roboto-Black.ttf") format("truetype");
+    font-family: "Roboto-Black";
 }
 body {
     font-family: "Roboto";
@@ -11,4 +29,12 @@ body {
 }
 h1 {
     font-size: 48px;
+    font-weight: bold;
+}
+#test1 {
+    font-family: "RobotoCondensed";
+}
+#test2 {
+    font-family: "RobotoCondensed";
+    font-weight: bold;
 }
