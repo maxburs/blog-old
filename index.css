@@ -22,10 +22,12 @@
 }
 body {
     font-family: "Roboto";
+    margin: 0px;
+    padding: 8px;
 }
 .container {
     margin: auto;
-    width: 800px;
+    max-width: 800px;
 }
 h1 {
     font-size: 48px;
