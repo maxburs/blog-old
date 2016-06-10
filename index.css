@@ -12,10 +12,6 @@
     font-family: "RobotoCondensed";
     font-weight: bold;
 }
-@font-face {
-    src: url("fonts/Roboto-Light.ttf") format("truetype");
-    font-family: "Roboto-Light";
-}
 body {
     font-family: "Roboto";
     margin: 0px;
