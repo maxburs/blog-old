@@ -95,24 +95,21 @@ p {
     width: 50%;
 }
 .img-link > div {
-    margin: 6px;
+    margin: 0px;
     position: relative;
+    margin: 0px 12px 12px 0px;
 }
 .img-link > div > .description {
-    background-color: black;
-    color: white;
+    background-color: white;
+    font-size: 17px;
     display: inline-block;
     position: absolute;
     bottom: 0px;
     left: 0px;
-    padding: 20px 36px 20px 36px;
-    font-family: "Roboto-Light";
-}
-.img-link:hover > div > .description {
-    color: rgb(160, 160, 160);
+    padding: 28px 44px 12px 12px;
 }
 .img-link > div >  .border {
-    padding: 0px 0px 12px 12px;
+    padding: 0px 0px 0px 0px;
 }
 .img-link > div >  .border > img{
     vertical-align: bottom;
