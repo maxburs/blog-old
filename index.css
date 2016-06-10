@@ -20,6 +20,7 @@ body {
     font-family: "Roboto";
     margin: 0px;
     padding: 0px;
+    font-size: 0px;
 }
 .container {
     margin: auto;
@@ -63,6 +64,7 @@ a {
     color: inherit;
     text-decoration: none;
     color: #FF530D;
+    font-size: 16px;
 }
 a:hover {
     color: #7F2906;
@@ -77,52 +79,43 @@ a:hover {
     height: 16px;
     width: 16px;
 }
+p {
+    margin: 0px;
+    font-size: 16px;
+}
 /*topic specific formatting goes here*/
 #get-in-touch {
     line-height: 1.4;
 }
 /*"stuff i've made" formatting goes here*/
 .img-link {
-    position: relative;
     overflow: auto;
     text-decoration: none;
     display: inline-block;
+    width: 50%;
+}
+.img-link > div {
     margin: 6px;
+    position: relative;
 }
-.img-link > .veil {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    opacity: 0;
-    z-index: 1;
-}
-.img-link:hover > .veil {
-    opacity: 0;
-}
-.img-link > .description {
+.img-link > div > .description {
     background-color: black;
     color: white;
     display: inline-block;
     position: absolute;
     bottom: 0px;
     left: 0px;
-    width: 80%;
+    width: 75%;
     padding: 20px 0px 20px 36px;
     font-family: "Roboto-Light";
 }
-
-.img-link:hover > .description {
+.img-link:hover > div > .description {
     color: rgb(160, 160, 160);
 }
-.img-link > .border {
+.img-link > div >  .border {
     padding: 0px 0px 12px 12px;
 }
-.img-link > img, .img-link > .border > img{
-    width: 256px;
-    height: 120px;
+.img-link > div >  .border > img{
     vertical-align: bottom;
-}
-p {
-    margin: 0px;
+    width: 100%;
 }
