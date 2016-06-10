@@ -1,27 +1,19 @@
 @font-face {
-    src: url("Roboto-Regular.ttf") format("truetype");
+    src: url("fonts/Roboto-Regular.ttf") format("truetype");
     font-family: "Roboto";
 }
 @font-face {
-    src: url("Roboto-Bold.ttf") format("truetype");
+    src: url("fonts/Roboto-Bold.ttf") format("truetype");
     font-family: "Roboto";
     font-weight: bold;
 }
 @font-face {
-    src: url("RobotoCondensed-Regular.ttf") format("truetype");
-    font-family: "RobotoCondensed";
-}
-@font-face {
-    src: url("RobotoCondensed-Bold.ttf") format("truetype");
+    src: url("fonts/RobotoCondensed-Bold.ttf") format("truetype");
     font-family: "RobotoCondensed";
     font-weight: bold;
 }
 @font-face {
-    src: url("Roboto-Black.ttf") format("truetype");
-    font-family: "Roboto-Black";
-}
-@font-face {
-    src: url("Roboto-Light.ttf") format("truetype");
+    src: url("fonts/Roboto-Light.ttf") format("truetype");
     font-family: "Roboto-Light";
 }
 body {
@@ -75,9 +67,19 @@ a {
 a:hover {
     color: #7F2906;
 }
-/*topic specific formatting goes here*/
-#stuff-ive-made > * {
+.icon {
+    height: 16px;
+    width: 16px;
+    vertical-align: -1px;
+}
+.icon-filler {
     display: inline-block;
+    height: 16px;
+    width: 16px;
+}
+/*topic specific formatting goes here*/
+#get-in-touch {
+    line-height: 1.4;
 }
 /*"stuff i've made" formatting goes here*/
 .img-link {
@@ -111,7 +113,7 @@ a:hover {
 }
 
 .img-link:hover > .description {
-    color: #7F2906;
+    color: rgb(160, 160, 160);
 }
 .img-link > .border {
     padding: 0px 0px 12px 12px;
