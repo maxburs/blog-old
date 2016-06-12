@@ -117,8 +117,8 @@ p {
     display: inline-block;
     position: absolute;
     bottom: 0px;
-    left: 0px;
-    padding: 12px 36px 0px 12px;
+    left: 12px;
+    padding: 12px 18px 3px 18px;
     background-color: white;
 }
 .img-link > div >  .border {
