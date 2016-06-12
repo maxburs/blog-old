@@ -5,8 +5,8 @@ var title;
 window.onload = function() {
     imgLinks = document.getElementsByClassName("img-link");
     title = document.getElementsByTagName("h1")[0];
-    layoutCheck();
-    window.addEventListener("resize", layoutCheck, false);
+    //layoutCheck();
+    //window.addEventListener("resize", layoutCheck, false);
 }
 
 function layoutCheck(){

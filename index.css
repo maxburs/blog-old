@@ -37,6 +37,12 @@ h1 {
     font-family: "RobotoCondensed";
     display: inline-block;
 }
+@media (min-width: 550px) {
+    /*forces h1 to break between first and last names*/
+    h1 > #responsive {
+        display: none;
+    }
+}
 #selfie {
     border-radius: 50%;
     height: 144px;
@@ -88,7 +94,16 @@ p {
     overflow: auto;
     text-decoration: none;
     display: inline-block;
-    width: 50%;
+}
+@media (min-width: 451px) {
+    .img-link {
+        width: 50%;
+    }
+}
+@media (max-width: 450px) {
+    .img-link {
+        width: 100%;
+    }
 }
 .img-link > div {
     margin: 0px;
