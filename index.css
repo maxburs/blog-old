@@ -17,6 +17,7 @@ body {
     margin: 0px;
     padding: 0px;
     font-size: 0px;
+    background-color: white;
 }
 .container {
     margin: auto;
@@ -53,7 +54,7 @@ hr {
     border: 0px;
     margin: 18px 12px 18px 12px;
     background-color: black;
-    height: 2px;
+    height: 3px;
 }
 h2, h3, h4, h5 {
     font-size: 24px;
@@ -118,6 +119,7 @@ p {
     bottom: 0px;
     left: 0px;
     padding: 12px 36px 0px 12px;
+    background-color: white;
 }
 .img-link > div >  .border {
     padding: 0px 0px 0px 0px;
