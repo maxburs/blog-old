@@ -95,11 +95,11 @@ p {
   @media (min-width: 451px) {
     .img-link {
       width: 50%; } }
-  .img-link div {
+  .img-link > div {
     margin: 0px;
     position: relative;
     margin: 0px 12px 12px 0px; }
-    .img-link div .description {
+    .img-link > div > .description {
       background-color: white;
       font-size: 17px;
       display: inline-block;
@@ -107,7 +107,7 @@ p {
       bottom: 0px;
       left: 12px;
       padding: 12px 18px 3px 18px; }
-    .img-link div .border > img {
+    .img-link > div > .border > img {
       vertical-align: bottom;
       width: 100%; }
 

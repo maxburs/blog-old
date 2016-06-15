@@ -104,11 +104,11 @@ p {
     @media (min-width: 451px) {
         width: 50%;
     }
-    div {
+    > div {
         margin: 0px;
         position: relative;
         margin: 0px 12px 12px 0px;
-        .description {
+        > .description {
             background-color: $color-background;
             font-size: 17px;
             display: inline-block;
@@ -117,7 +117,7 @@ p {
             left: 12px;
             padding: 12px 18px 3px 18px;
         }
-        .border > img{
+        > .border > img{
             vertical-align: bottom;
             width: 100%;
         }
