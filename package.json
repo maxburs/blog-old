@@ -1,0 +1,18 @@
+{
+  "name": "maxwell-burson-portfolio",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pug-EBKAC/portfolio.git"
+  },
+  "author": "Maxwell Burson",
+  "bugs": {
+    "url": "https://github.com/Pug-EBKAC/portfolio/issues"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^1.2.1"
+  }
+}
