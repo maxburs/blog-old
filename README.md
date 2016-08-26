@@ -1,5 +1,3 @@
-# Maxwell Burson's Portfolio
+View portfolio at: [https://maxwellburson.github.io/](https://maxwellburson.github.io/)
 
-view portfolio at [https://maxwellburson.github.io/](https://maxwellburson.github.io/)
-
-website is built with npm and grunt
+Website is compiled with npm and grunt.
