@@ -13,21 +13,14 @@ module.exports = function(grunt) {
                 }
             }
         },
-        uglify: {
-            build: {
-                src: 'src/index.js',
-                dest: 'index.js'
-            }
-        },
         watch: {
             files: ['src/*.js', 'src/*.scss'],
-            tasks: ['uglify', 'sass']
+            tasks: ['sass']
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['uglify', 'sass']);
+    grunt.registerTask('default', [ 'sass']);
 };
