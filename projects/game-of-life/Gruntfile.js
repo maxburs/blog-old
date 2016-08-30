@@ -2,32 +2,36 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        
+
         sass: {
             options: {
                 sourceMap: true
             },
             dist: {
                 files: {
-                    "index.css": "src/index.scss"
+                    "game-of-life.css": "src/game-of-life.scss"
                 }
-            }
-        },
-        uglify: {
-            build: {
-                src: 'src/game-of-life.js',
-                dest: 'game-of-life.js'
             }
         },
         watch: {
             files: ['src/*.js', 'src/*.scss'],
-            tasks: ['uglify', 'sass']
+            tasks: ['babel', 'sass']
+        },
+        babel: {
+            options: {
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    "game-of-life.js": "src/game-of-life.js"
+                }
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-babel');
 
-    grunt.registerTask('default', ['uglify', 'sass']);
+    grunt.registerTask('default', ['babel', 'sass']);
 };
