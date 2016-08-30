@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pug-EBKAC/portfolio.git"
+    "url": "git+https://github.com/maxwellburson/maxwellburson.github.io.git"
   },
   "author": "Maxwell Burson",
   "bugs": {
-    "url": "https://github.com/Pug-EBKAC/portfolio/issues"
+    "url": "https://github.com/maxwellburson/maxwellburson.github.io/issues"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
