@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "author": "Maxwell Burson",
   "devDependencies": {
+    "babel-preset-react": "^6.11.1",
     "grunt": "^1.0.1",
     "grunt-babel": "^6.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-sass": "^1.2.1"
+  },
+  "babel": {
+    "presets": "react"
   }
 }
