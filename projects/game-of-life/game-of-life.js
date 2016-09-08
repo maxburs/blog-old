@@ -309,7 +309,8 @@ var Controls = React.createClass({
             "div",
             { style: {
                     position: "relative",
-                    height: "30%"
+                    height: "30%",
+                    fontSize: "16px"
                 } },
             React.createElement(
                 "div",
