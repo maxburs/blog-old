@@ -53,7 +53,7 @@ var GameOfLife = React.createClass({
         };
         return <div style={style}>
             <div
-                style={{height: "70%", width: "100%"}}
+                style={{height: "70%", width: "100%", backgroundColor: "grey"}}
                 
                 >
                 <FixedRatio

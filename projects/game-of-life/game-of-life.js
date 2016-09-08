@@ -53,7 +53,7 @@ var GameOfLife = React.createClass({
             React.createElement(
                 "div",
                 {
-                    style: { height: "70%", width: "100%" }
+                    style: { height: "70%", width: "100%", backgroundColor: "grey" }
 
                 },
                 React.createElement(FixedRatio, {

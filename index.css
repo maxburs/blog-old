@@ -82,7 +82,7 @@ a:hover {
   width: 16px; }
 
 p {
-  margin: 0px;
+  margin: .5em 0em 1em 0em;
   font-size: 16px; }
 
 /*topic specific formatting under here*/
@@ -103,7 +103,6 @@ p {
     width: 50%; } }
 
 .img-link > div {
-  margin: 0px;
   position: relative;
   margin: 0px 12px 12px 0px; }
 
