@@ -438,11 +438,12 @@ var Controls = React.createClass({
                     style: {
                         margin: "auto",
                         position: "absolute",
-                        bottom: "0.5em",
+                        bottom: "0.2em",
                         left: "0px",
                         right: "0px",
                         display: "block",
-                        textAlign: "center" },
+                        textAlign: "center",
+                        overflow: "hidden" },
                     href: "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life",
                     target: "_blank" },
                 "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
