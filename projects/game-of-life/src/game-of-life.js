@@ -390,10 +390,6 @@ var Controls = React.createClass({
             <a
                 style={{
                     margin: "auto",
-                    position: "absolute",
-                    bottom: "0.2em",
-                    left: "0px",
-                    right: "0px",
                     display: "block",
                     textAlign: "center",
                     overflow: "hidden"}}
