@@ -310,7 +310,8 @@ var Controls = React.createClass({
             { style: {
                     position: "relative",
                     height: "30%",
-                    fontSize: "16px"
+                    fontSize: "16px",
+                    overflow: "scroll"
                 } },
             React.createElement(
                 "div",

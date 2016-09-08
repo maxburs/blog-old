@@ -302,7 +302,8 @@ var Controls = React.createClass({
         return <div style={{
                             position: "relative",
                             height: "30%",
-                            fontSize: "16px"
+                            fontSize: "16px",
+                            overflow: "scroll"
                         }}>
             <div style={inputWrapStyle}>
                 <label
