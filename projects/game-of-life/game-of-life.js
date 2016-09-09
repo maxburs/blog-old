@@ -1,20 +1,25 @@
+"use strict";
+
 //parent component, renders board and controls and connects the two
 var GameOfLife = React.createClass({
     displayName: "GameOfLife",
 
     //default board and control state
-    getInitialState: function () {
+    getInitialState: function getInitialState() {
         return {
-            height: 25,
-            width: 25,
+            height: 20,
+            width: 20,
             interval: 500,
             pause: false,
             boardKey: 0,
-            percentLife: 0.3
+            percentLife: 0.3,
+            generations: 0,
+            nextHeight: 20,
+            nextWidth: 20
         };
     },
     //handles changes from input
-    handleChange: function (event) {
+    handleChange: function handleChange(event) {
         var newState = {};
 
         if (event.target.name === "interval") {
@@ -23,26 +28,34 @@ var GameOfLife = React.createClass({
         } else if (event.target.name === "pause") {
             newState.pause = event.target.checked;
         } else if (event.target.name === "randomize") {
-            newState.empty = false;
-            this.resetBoard();
+            this.setState({ empty: false }, this.resetBoard);
         } else if (event.target.name === "clear") {
-            newState.empty = true;
-            this.resetBoard();
+            this.setState({ empty: true }, this.resetBoard);
         } else if (event.target.name === "width") {
-            newState.width = event.target.value;
-            this.resetBoard();
+            this.setState({ nextWidth: +event.target.value });
         } else if (event.target.name === "height") {
-            newState.height = event.target.value;
-            this.resetBoard();
+            this.setState({ nextHeight: +event.target.value });
         } else if (event.target.name === "percentLife") {
             newState.percentLife = event.target.value;
+        } else if (event.target.name === "resetGenerations") {
+            newState.generations = 0;
+        } else if (event.target.name === "applySize") {
+            console.log("this.state: ", this.state);
+            this.setState({
+                height: this.state.nextHeight,
+                width: this.state.nextWidth
+            }, this.resetBoard);
         }
         this.setState(newState);
     },
-    resetBoard: function () {
-        this.setState({ boardKey: this.state.boardKey + 1 });
+    //increases the generation count by one
+    incrementGenereations: function incrementGenereations() {
+        this.setState({ generations: this.state.generations + 1 });
     },
-    render: function () {
+    resetBoard: function resetBoard() {
+        this.setState({ boardKey: this.state.boardKey + 1, generations: 0 });
+    },
+    render: function render() {
         var style = {
             height: "100%",
             width: "100%"
@@ -53,9 +66,7 @@ var GameOfLife = React.createClass({
             React.createElement(
                 "div",
                 {
-                    style: { height: "70%", width: "100%", backgroundColor: "grey" }
-
-                },
+                    style: { height: "70%", width: "100%" } },
                 React.createElement(FixedRatio, {
                     childComponents: React.createElement(Board, {
                         height: this.state.height,
@@ -64,18 +75,20 @@ var GameOfLife = React.createClass({
                         pause: this.state.pause,
                         percentLife: this.state.percentLife,
                         empty: this.state.empty,
-                        key: this.state.boardKey
+                        key: this.state.boardKey,
+                        incrementGenereations: this.incrementGenereations
                     }),
                     ratio: this.state.width / this.state.height
                 })
             ),
             React.createElement(Controls, {
                 handleChange: this.handleChange,
-                height: this.state.height,
-                width: this.state.width,
+                height: this.state.nextHeight,
+                width: this.state.nextWidth,
                 interval: this.state.interval,
                 pause: this.state.pause,
-                percentLife: this.state.percentLife
+                percentLife: this.state.percentLife,
+                generations: this.state.generations
             })
         );
     }
@@ -85,7 +98,7 @@ var GameOfLife = React.createClass({
 var Board = React.createClass({
     displayName: "Board",
 
-    getInitialState: function () {
+    getInitialState: function getInitialState() {
         //set inital board update rate if game is not paused
         var interval = undefined;
         if (this.props.pause === false) {
@@ -101,64 +114,82 @@ var Board = React.createClass({
                 initialCellValues.push(false);
             }
         }
-
-        return { status: initialCellValues, interval: interval };
+        var cellNeighbors = this.buildCellNeighbors();
+        //console.log("cell neighbors: ", cellNeighbors);
+        return { status: initialCellValues, interval: interval, cellNeighbors: cellNeighbors };
     },
     //runs when prop(s) are updated
-    componentWillReceiveProps: function (nextProps) {
+    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
         window.clearInterval(this.state.interval);
         var newState = {};
-
         //if the new state isn't paused then once again set the interval
         if (nextProps.pause === false) {
             newState.interval = window.setInterval(this.update, nextProps.interval);;
         }
-
         this.setState(newState);
     },
-    //increments the game of life
-    update: function () {
-        //new game of life board status
-        var newStatus = [];
-        //loops though previous game board and pushes the status of cells to the new board one at a time
-        this.state.status.forEach(function (alive, i, status) {
-            var neighbors = 0;
+    //returns an array with filled with an array for each cell with the index of that cells neighbors
+    buildCellNeighbors: function buildCellNeighbors() {
+        var cellNeighbors = [];
+        //this.state.status.forEach(function(alive, i, status){
+        for (var i = 0; i < this.props.height * this.props.width; i++) {
+            var currentNeighbors = [];
             //determine if cell is on the top, left, right, or bottom of grid
             var top = this.props.width - i > 0;
             var left = i % this.props.width === 0;
             var right = i % this.props.width === this.props.width - 1;
-            var bottom = this.props.height * this.props.width - i < this.props.width + 1;
-            /*console.log("cell " + i + " has properties:"
-                + "\n   top = " + top
-                + "\n   left = " + left
-                + "\n   right = " + right
-                + "\n   bottom = " + bottom);*/
-            //check surrounding cells from top left clockwise and increment neighbors if alive
-            if (!top && !left && status[i - this.props.width - 1]) {
-                neighbors++;
+            var bottom = (this.props.height - 1) * this.props.width < i + 1;
+            /*console.log("cell " + i
+                + "\n   top: " + top
+                + "\n   left: " + left
+                + "\n   right: " + right
+                + "\n   bottom: " + bottom);*/
+            //for each potential neighbor, if that neighbor isn't off the grid then add it's index to the array
+            if (!top && !left) {
+                currentNeighbors.push(i - this.props.width - 1);
             }
-            if (!top && status[i - this.props.width]) {
-                neighbors++;
+            if (!top) {
+                currentNeighbors.push(i - this.props.width);
             }
-            if (!top && !right && status[i - this.props.width + 1]) {
-                neighbors++;
+            if (!top && !right) {
+                currentNeighbors.push(i - this.props.width + 1);
             }
-            if (!right && status[i + 1]) {
-                neighbors++;
+            if (!right) {
+                currentNeighbors.push(i + 1);
             }
-            if (!right && !bottom && status[i + this.props.width + 1]) {
-                neighbors++;
+            if (!right && !bottom) {
+                currentNeighbors.push(i + this.props.width + 1);
             }
-            if (!bottom && status[i + this.props.width]) {
-                neighbors++;
+            if (!bottom) {
+                currentNeighbors.push(i + this.props.width);
             }
-            if (!bottom && !left && status[i + this.props.width - 1]) {
-                neighbors++;
+            if (!bottom && !left) {
+                currentNeighbors.push(i + this.props.width - 1);
             }
-            if (!left && status[i - 1]) {
-                neighbors++;
+            if (!left) {
+                currentNeighbors.push(i - 1);
             }
-            //console.log("cell " + i + " has " + neighbors + " neighbors");
+            //console.log("neighbors: " + currentNeighbors);
+            cellNeighbors.push(currentNeighbors);
+        }
+        return cellNeighbors;
+    },
+    //increments the game of life
+    update: function update() {
+        //new game of life board status
+        var newStatus = [];
+        //loops though previous game board and pushes the status of cells to the new board one at a time
+        //this.state.status.forEach(function(alive, i, status){
+        for (var i in this.state.cellNeighbors) {
+            var neighbors = 0;
+            //console.log("cell: " + i);
+            for (var p in this.state.cellNeighbors[i]) {
+                if (this.state.status[this.state.cellNeighbors[i][p]]) {
+                    //console.log("   live neighbor at: " + this.state.cellNeighbors[i][p]);
+                    neighbors++;
+                }
+            }
+            //console.log("   " + neighbors + " live neighbors");
             /*
             RULES:
             +  Any live cell with fewer than two live neighbours dies, as if caused by under-population.
@@ -170,7 +201,7 @@ var Board = React.createClass({
             if (neighbors < 2) {
                 newStatus.push(false);
             } else if (neighbors === 2) {
-                if (alive) {
+                if (this.state.status[i]) {
                     newStatus.push(true);
                 } else {
                     newStatus.push(false);
@@ -180,17 +211,20 @@ var Board = React.createClass({
             } else {
                 newStatus.push(false);
             }
-        }, this);
+            //console.log("   new status: ", newStatus[newStatus.length - 1]);
+        };
+        //console.log("new status: ", newStatus);
+        this.props.incrementGenereations();
         this.setState({ status: newStatus });
     },
-    editCell: function (cell) {
+    editCell: function editCell(cell) {
         this.state.status[cell] = !this.state.status[cell];
         this.setState({ status: this.state.status });
     },
-    componentWillUnmount: function () {
+    componentWillUnmount: function componentWillUnmount() {
         window.clearInterval(this.state.interval);
     },
-    render: function () {
+    render: function render() {
         var cells = [];
         var cellHeight = 100 / this.props.height + "%";
         var cellWidth = 100 / this.props.width + "%";
@@ -208,7 +242,8 @@ var Board = React.createClass({
             height: "100%",
             width: "100%",
             fontSize: "0px",
-            cursor: "pointer"
+            cursor: "pointer",
+            overflow: "hidden"
         };
         return React.createElement(
             "div",
@@ -222,17 +257,17 @@ var Board = React.createClass({
 var FixedRatio = React.createClass({
     displayName: "FixedRatio",
 
-    getInitialState: function () {
+    getInitialState: function getInitialState() {
         return { style: { visibility: "hidden" }, domNode: undefined };
     },
-    componentDidMount: function () {
+    componentDidMount: function componentDidMount() {
         this.remeasure();
         window.addEventListener("resize", this.remeasure);
     },
-    componentWillUnmount: function () {
+    componentWillUnmount: function componentWillUnmount() {
         window.removeEventListener("resize", this.remeasure);
     },
-    remeasure: function () {
+    remeasure: function remeasure() {
         //timeout code so that we don't remeasure for every step while the window is being resized
         window.clearTimeout(this.state.remeasureTimeout);
         var remeasureTimeout = window.setTimeout(run.bind(this), 200);
@@ -255,16 +290,15 @@ var FixedRatio = React.createClass({
         }
     },
     //if the ratio prop changes then remeasure, this is not in the "render" fuction because we do not want to remeaure when the childComponents prop changes
-    componentWillReceiveProps: function (newProps) {
+    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
         if (newProps.ratio !== this.props.ratio) {
-            console.log("working...");
             this.remeasure();
         }
     },
-    updateDOMRef: function (node) {
+    updateDOMRef: function updateDOMRef(node) {
         this.setState({ domNode: node });
     },
-    render: function () {
+    render: function render() {
         //returns a div that we will use to measure the space we have and a <div> that we will size depending on the ratio given
         return React.createElement(
             "div",
@@ -284,10 +318,10 @@ var Cell = React.createClass({
     displayName: "Cell",
 
     //lets Board know that cell has been clicked and gives it the cell index so it knows were the click was
-    handleClick: function () {
+    handleClick: function handleClick() {
         this.props.handleClick(this.props.index);
     },
-    render: function () {
+    render: function render() {
         var style = {
             backgroundColor: this.props.status === "alive" ? "white" : "black",
             height: this.props.height,
@@ -300,18 +334,43 @@ var Cell = React.createClass({
 var Controls = React.createClass({
     displayName: "Controls",
 
-    render: function () {
+    render: function render() {
+        var vPad = "3px";
+        var hPad = "5px";
         var inputWrapStyle = {
             display: "inline-block",
-            padding: "10px"
+            backgroundColor: "rgb(240, 240, 240)",
+            padding: vPad + " 0px 0px " + hPad,
+            margin: "4px 6px"
+        };
+        var elementStyle = {
+            verticalAlign: "middle",
+            border: "none",
+            padding: "0px " + hPad + " " + vPad + " 0px"
+        };
+        var buttonStyle = {
+            fontSize: "14px",
+            verticalAlign: "middle",
+            margin: "0px " + hPad + " " + vPad + " 0px",
+            display: "inline-block"
+        };
+        var textInputStyle = {
+            verticalAlign: "middle",
+            border: "none",
+            fontSize: "inherit",
+            padding: vPad + " " + hPad,
+            textAlign: "center",
+            margin: "0px " + hPad + " " + vPad + " 0px"
         };
         return React.createElement(
             "div",
             { style: {
                     position: "relative",
                     height: "30%",
+                    maxWidth: "600px",
+                    margin: "auto",
                     fontSize: "16px",
-                    overflow: "scroll"
+                    overflow: "auto"
                 } },
             React.createElement(
                 "div",
@@ -319,41 +378,57 @@ var Controls = React.createClass({
                 React.createElement(
                     "label",
                     {
-                        style: { verticalAlign: "middle" } },
-                    "Refresh Delay (seconds)"
+                        style: elementStyle },
+                    "Refresh Delay"
                 ),
                 React.createElement("input", {
                     onChange: this.props.handleChange,
-                    style: { verticalAlign: "middle" },
+                    style: elementStyle,
                     type: "range",
                     value: this.props.interval / 1000,
                     name: "interval",
-                    min: "0.1",
-                    max: "2",
-                    step: "0.1" }),
+                    min: "0.05",
+                    max: "1",
+                    step: "0.05" }),
+                React.createElement(
+                    "span",
+                    { style: elementStyle },
+                    (this.props.interval / 1000).toFixed(2),
+                    " seconds"
+                )
+            ),
+            React.createElement(
+                "div",
+                { style: inputWrapStyle },
+                React.createElement(
+                    "span",
+                    { style: elementStyle },
+                    "Generations:"
+                ),
+                React.createElement(
+                    "span",
+                    { style: Object.assign({}, elementStyle, { width: "3em", textAlign: "right", display: "inline-block" }) },
+                    this.props.generations
+                ),
                 React.createElement("input", {
-                    name: "interval",
-                    onChange: this.props.handleChange,
-                    style: {
-                        verticalAlign: "middle",
-                        width: "2em"
-                    },
-                    type: "text",
-                    value: this.props.interval / 1000
-                })
+                    style: buttonStyle,
+                    type: "button",
+                    onClick: this.props.handleChange,
+                    name: "resetGenerations",
+                    value: "reset" })
             ),
             React.createElement(
                 "div",
                 { style: inputWrapStyle },
                 React.createElement(
                     "label",
-                    { style: { verticalAlign: "middle" }
+                    { style: elementStyle
                     },
                     "Pause"
                 ),
                 React.createElement("input", {
                     type: "checkbox",
-                    style: { verticalAlign: "middle" },
+                    style: elementStyle,
                     onChange: this.props.handleChange,
                     checked: this.props.pause,
                     name: "pause"
@@ -363,40 +438,7 @@ var Controls = React.createClass({
                 "div",
                 { style: inputWrapStyle },
                 React.createElement("input", {
-                    type: "button",
-                    onClick: this.props.handleChange,
-                    name: "randomize",
-                    value: "randomize"
-                })
-            ),
-            React.createElement(
-                "div",
-                { style: inputWrapStyle },
-                React.createElement(
-                    "label",
-                    {
-                        style: { verticalAlign: "middle" } },
-                    "Life Odds"
-                ),
-                React.createElement("input", {
-                    onChange: this.props.handleChange,
-                    style: { verticalAlign: "middle" },
-                    type: "range",
-                    defaultValue: this.props.percentLife,
-                    name: "percentLife",
-                    min: "0",
-                    max: "1",
-                    step: "0.01" }),
-                React.createElement(
-                    "span",
-                    null,
-                    this.props.percentLife
-                )
-            ),
-            React.createElement(
-                "div",
-                { style: inputWrapStyle },
-                React.createElement("input", {
+                    style: buttonStyle,
                     type: "button",
                     onClick: this.props.handleChange,
                     name: "clear",
@@ -406,44 +448,65 @@ var Controls = React.createClass({
             React.createElement(
                 "div",
                 { style: inputWrapStyle },
+                React.createElement("input", {
+                    style: buttonStyle,
+                    type: "button",
+                    onClick: this.props.handleChange,
+                    name: "randomize",
+                    value: "randomize"
+                }),
+                React.createElement("input", {
+                    onChange: this.props.handleChange,
+                    style: elementStyle,
+                    type: "range",
+                    defaultValue: this.props.percentLife,
+                    name: "percentLife",
+                    min: "0",
+                    max: "1",
+                    step: "0.01" }),
                 React.createElement(
                     "span",
-                    null,
-                    "Width:"
-                ),
-                React.createElement("input", {
-                    type: "number",
-                    onChange: this.props.handleChange,
-                    name: "width",
-                    defaultValue: this.props.width
-                })
+                    { style: elementStyle },
+                    this.props.percentLife * 100,
+                    "%"
+                )
             ),
             React.createElement(
                 "div",
                 { style: inputWrapStyle },
                 React.createElement(
                     "span",
-                    null,
-                    "Height:"
+                    {
+                        style: elementStyle },
+                    "Size:"
                 ),
                 React.createElement("input", {
+                    style: Object.assign({}, textInputStyle, { width: "2.5em" }),
+                    type: "number",
+                    onChange: this.props.handleChange,
+                    name: "width",
+                    defaultValue: this.props.width
+                }),
+                React.createElement(
+                    "span",
+                    {
+                        style: elementStyle },
+                    "x"
+                ),
+                React.createElement("input", {
+                    style: Object.assign({}, textInputStyle, { width: "2.5em" }),
                     type: "number",
                     onChange: this.props.handleChange,
                     name: "height",
                     defaultValue: this.props.height
+                }),
+                React.createElement("input", {
+                    style: buttonStyle,
+                    type: "button",
+                    onClick: this.props.handleChange,
+                    name: "applySize",
+                    value: "Apply"
                 })
-            ),
-            React.createElement(
-                "a",
-                {
-                    style: {
-                        margin: "auto",
-                        display: "block",
-                        textAlign: "center",
-                        overflow: "hidden" },
-                    href: "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life",
-                    target: "_blank" },
-                "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
             )
         );
     }

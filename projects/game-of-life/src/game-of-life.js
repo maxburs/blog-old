@@ -3,12 +3,15 @@ var GameOfLife = React.createClass({
     //default board and control state
     getInitialState: function(){
         return {
-            height: 25,
-            width: 25,
+            height: 20,
+            width: 20,
             interval: 500,
             pause: false,
             boardKey: 0,
-            percentLife: 0.3
+            percentLife: 0.3,
+            generations: 0,
+            nextHeight: 20,
+            nextWidth: 20
         };
     },
     //handles changes from input
@@ -23,28 +26,38 @@ var GameOfLife = React.createClass({
             newState.pause = event.target.checked;
         }
         else if (event.target.name === "randomize") {
-            newState.empty = false;
-            this.resetBoard();
+            this.setState({empty: false}, this.resetBoard);
         }
         else if (event.target.name === "clear"){
-            newState.empty = true;
-            this.resetBoard();
+            this.setState({empty: true}, this.resetBoard);
         }
         else if (event.target.name === "width"){
-            newState.width = event.target.value;
-            this.resetBoard();
+            this.setState({nextWidth: +event.target.value});
         }
         else if (event.target.name === "height"){
-            newState.height = event.target.value;
-            this.resetBoard();
+            this.setState({nextHeight: +event.target.value});
         }
         else if (event.target.name === "percentLife"){
             newState.percentLife = event.target.value;
         }
+        else if (event.target.name === "resetGenerations"){
+            newState.generations = 0;
+        }
+        else if (event.target.name === "applySize"){
+            console.log("this.state: ", this.state);
+            this.setState({
+                height: this.state.nextHeight,
+                width: this.state.nextWidth
+            }, this.resetBoard);
+        }
         this.setState(newState);
     },
+    //increases the generation count by one
+    incrementGenereations: function(){
+        this.setState({generations: this.state.generations + 1});
+    },
     resetBoard: function(){
-        this.setState({boardKey: this.state.boardKey + 1});
+        this.setState({boardKey: this.state.boardKey + 1, generations: 0});
     },
     render: function(){
         var style = {
@@ -53,9 +66,7 @@ var GameOfLife = React.createClass({
         };
         return <div style={style}>
             <div
-                style={{height: "70%", width: "100%", backgroundColor: "grey"}}
-                
-                >
+                style={{height: "70%", width: "100%"}}>
                 <FixedRatio
                     childComponents={(
                         <Board
@@ -66,6 +77,7 @@ var GameOfLife = React.createClass({
                             percentLife={this.state.percentLife}
                             empty={this.state.empty}
                             key={this.state.boardKey}
+                            incrementGenereations={this.incrementGenereations}
                         />
                     )}
                     ratio={this.state.width/this.state.height}
@@ -73,11 +85,12 @@ var GameOfLife = React.createClass({
             </div>
             <Controls
                 handleChange={this.handleChange}
-                height={this.state.height}
-                width={this.state.width}
+                height={this.state.nextHeight}
+                width={this.state.nextWidth}
                 interval={this.state.interval}
                 pause={this.state.pause}
                 percentLife={this.state.percentLife}
+                generations={this.state.generations}
                 />
             </div>;
     }
@@ -102,90 +115,111 @@ var Board = React.createClass({
                 initialCellValues.push(false);
             }
         }
-
-        return {status: initialCellValues, interval: interval};
+        var cellNeighbors = this.buildCellNeighbors();
+        //console.log("cell neighbors: ", cellNeighbors);
+        return {status: initialCellValues, interval: interval, cellNeighbors: cellNeighbors};
     },
     //runs when prop(s) are updated
     componentWillReceiveProps: function(nextProps){
         window.clearInterval(this.state.interval);
         var newState = {};
-
         //if the new state isn't paused then once again set the interval
         if (nextProps.pause === false){
             newState.interval = window.setInterval(this.update, nextProps.interval);;
         }
-
         this.setState(newState);
+    },
+    //returns an array with filled with an array for each cell with the index of that cells neighbors
+    buildCellNeighbors: function(){
+        var cellNeighbors = [];
+        //this.state.status.forEach(function(alive, i, status){
+        for (var i = 0; i < this.props.height * this.props.width; i++) {
+            var currentNeighbors = [];
+            //determine if cell is on the top, left, right, or bottom of grid
+            var top = this.props.width - i > 0;
+            var left = i % this.props.width === 0;
+            var right = i % this.props.width === this.props.width - 1;
+            var bottom = (this.props.height - 1) * this.props.width < i + 1;
+            /*console.log("cell " + i
+                + "\n   top: " + top
+                + "\n   left: " + left
+                + "\n   right: " + right
+                + "\n   bottom: " + bottom);*/
+            //for each potential neighbor, if that neighbor isn't off the grid then add it's index to the array
+            if (!top && !left){
+                currentNeighbors.push(i - this.props.width - 1);
+            }
+            if (!top){
+                currentNeighbors.push(i - this.props.width);
+            }
+            if (!top && !right){
+                currentNeighbors.push(i - this.props.width + 1);
+            }
+            if (!right){
+                currentNeighbors.push(i + 1);
+            }
+            if (!right && !bottom){
+                currentNeighbors.push(i + this.props.width + 1);
+            }
+            if (!bottom){
+                currentNeighbors.push(i + this.props.width);
+            }
+            if (!bottom && !left){
+                currentNeighbors.push(i + this.props.width - 1);
+            }
+            if (!left){
+                currentNeighbors.push(i - 1);
+            }
+            //console.log("neighbors: " + currentNeighbors);
+            cellNeighbors.push(currentNeighbors);
+        }
+        return cellNeighbors;
     },
     //increments the game of life
     update: function(){
         //new game of life board status
         var newStatus = [];
         //loops though previous game board and pushes the status of cells to the new board one at a time
-        this.state.status.forEach(function(alive, i, status){
+        //this.state.status.forEach(function(alive, i, status){
+        for (var i in this.state.cellNeighbors){
             var neighbors = 0;
-            //determine if cell is on the top, left, right, or bottom of grid
-            var top = this.props.width - i > 0;
-            var left = i % this.props.width === 0;
-            var right = i % this.props.width === this.props.width - 1;
-            var bottom = (this.props.height * this.props.width) - i < this.props.width + 1;
-            /*console.log("cell " + i + " has properties:"
-                + "\n   top = " + top
-                + "\n   left = " + left
-                + "\n   right = " + right
-                + "\n   bottom = " + bottom);*/
-                //check surrounding cells from top left clockwise and increment neighbors if alive
-                if (!top && !left && status[i - this.props.width - 1]){
+            //console.log("cell: " + i);
+            for (var p in this.state.cellNeighbors[i]) {
+                if (this.state.status[this.state.cellNeighbors[i][p]]) {
+                    //console.log("   live neighbor at: " + this.state.cellNeighbors[i][p]);
                     neighbors++;
                 }
-                if (!top && status[i - this.props.width]){
-                    neighbors++;
-                }
-                if (!top && !right && status[i - this.props.width + 1]){
-                    neighbors++;
-                }
-                if (!right && status[i + 1]){
-                    neighbors++;
-                }
-                if (!right && !bottom && status[i + this.props.width + 1]){
-                    neighbors++;
-                }
-                if (!bottom && status[i + this.props.width]){
-                    neighbors++;
-                }
-                if (!bottom && !left && status[i + this.props.width - 1]){
-                    neighbors++;
-                }
-                if (!left && status[i - 1]){
-                    neighbors++;
-                }
-                //console.log("cell " + i + " has " + neighbors + " neighbors");
-                /*
-                RULES:
-                +  Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-                +  Any live cell with two or three live neighbours lives on to the next generation.
-                +  Any live cell with more than three live neighbours dies, as if by over-population.
-                +  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-                following code executes rules
-                */
-                if (neighbors < 2){
-                    newStatus.push(false);
-                }
-                else if (neighbors === 2){
-                    if (alive){
-                        newStatus.push(true);
-                    }
-                    else {
-                        newStatus.push(false);
-                    }
-                }
-                else if (neighbors === 3){
+            }
+            //console.log("   " + neighbors + " live neighbors");
+            /*
+            RULES:
+            +  Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+            +  Any live cell with two or three live neighbours lives on to the next generation.
+            +  Any live cell with more than three live neighbours dies, as if by over-population.
+            +  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+            following code executes rules
+            */
+            if (neighbors < 2){
+                newStatus.push(false);
+            }
+            else if (neighbors === 2){
+                if (this.state.status[i]){
                     newStatus.push(true);
                 }
                 else {
                     newStatus.push(false);
                 }
-        }, this);
+            }
+            else if (neighbors === 3){
+                newStatus.push(true);
+            }
+            else {
+                newStatus.push(false);
+            }
+            //console.log("   new status: ", newStatus[newStatus.length - 1]);
+        };
+        //console.log("new status: ", newStatus);
+        this.props.incrementGenereations();
         this.setState({status: newStatus});
     },
     editCell: function(cell){
@@ -215,7 +249,8 @@ var Board = React.createClass({
             height: "100%",
             width: "100%",
             fontSize: "0px",
-            cursor: "pointer"
+            cursor: "pointer",
+            overflow: "hidden"
         };
         return <div style={style}>{cells}</div>;
     }
@@ -259,7 +294,6 @@ var FixedRatio = React.createClass({
     //if the ratio prop changes then remeasure, this is not in the "render" fuction because we do not want to remeaure when the childComponents prop changes
     componentWillReceiveProps: function(newProps){
         if (newProps.ratio !== this.props.ratio){
-            console.log("working...");
             this.remeasure();
         }
     },
@@ -295,45 +329,73 @@ var Cell = React.createClass({
 });
 var Controls = React.createClass({
     render: function(){
+        var vPad = "3px"
+        var hPad = "5px"
         var inputWrapStyle = {
             display: "inline-block",
-            padding: "10px"
+            backgroundColor: "rgb(240, 240, 240)",
+            padding: vPad + " 0px 0px " + hPad,
+            margin: "4px 6px"
+        };
+        var elementStyle = {
+            verticalAlign: "middle",
+            border: "none",
+            padding: "0px " + hPad + " " + vPad + " 0px"
+        };
+        var buttonStyle = {
+            fontSize: "14px",
+            verticalAlign: "middle",
+            margin: "0px " + hPad + " " + vPad + " 0px",
+            display: "inline-block"
+        };
+        var textInputStyle = {
+            verticalAlign: "middle",
+            border: "none",
+            fontSize: "inherit",
+            padding: vPad + " " + hPad,
+            textAlign: "center",
+            margin: "0px " + hPad + " " + vPad + " 0px"
         };
         return <div style={{
                             position: "relative",
                             height: "30%",
+                            maxWidth: "600px",
+                            margin: "auto",
                             fontSize: "16px",
-                            overflow: "scroll"
+                            overflow: "auto"
                         }}>
             <div style={inputWrapStyle}>
                 <label
-                    style={{verticalAlign: "middle"}}>Refresh Delay (seconds)</label>
+                    style={elementStyle}>Refresh Delay</label>
                 <input
                     onChange={this.props.handleChange}
-                    style={{verticalAlign: "middle"}}
+                    style={elementStyle}
                     type="range"
                     value={this.props.interval / 1000}
                     name="interval"
-                    min="0.1"
-                    max="2"
-                    step="0.1"/>
+                    min="0.05"
+                    max="1"
+                    step="0.05"/>
+                <span style={elementStyle} >
+                    {(this.props.interval / 1000).toFixed(2)} seconds
+                    </span>
+            </div>
+            <div style={inputWrapStyle} >
+                <span style={elementStyle} >Generations:</span>
+                <span style={Object.assign({}, elementStyle, {width: "3em", textAlign: "right", display: "inline-block"})}>{this.props.generations}</span>
                 <input
-                    name="interval"
-                    onChange={this.props.handleChange}
-                    style={{
-                        verticalAlign: "middle",
-                        width: "2em"
-                    }}
-                    type="text"
-                    value={this.props.interval / 1000}
-                    />
+                    style={buttonStyle}
+                    type="button"
+                    onClick={this.props.handleChange}
+                    name="resetGenerations"
+                    value="reset" />
             </div>
             <div style={inputWrapStyle}>
-                <label style={{verticalAlign: "middle"}}
+                <label style={elementStyle}
                     >Pause</label>
                 <input
                     type="checkbox"
-                    style={{verticalAlign: "middle"}}
+                    style={elementStyle}
                     onChange={this.props.handleChange}
                     checked={this.props.pause}
                     name="pause"
@@ -341,28 +403,7 @@ var Controls = React.createClass({
             </div>
             <div style={inputWrapStyle}>
                 <input
-                    type="button"
-                    onClick={this.props.handleChange}
-                    name="randomize"
-                    value="randomize"
-                    />
-            </div>
-            <div style={inputWrapStyle}>
-                <label
-                    style={{verticalAlign: "middle"}}>Life Odds</label>
-                <input
-                    onChange={this.props.handleChange}
-                    style={{verticalAlign: "middle"}}
-                    type="range"
-                    defaultValue={this.props.percentLife}
-                    name="percentLife"
-                    min="0"
-                    max="1"
-                    step="0.01"/>
-                <span>{this.props.percentLife}</span>
-            </div>
-            <div style={inputWrapStyle}>
-                <input
+                    style={buttonStyle}
                     type="button"
                     onClick={this.props.handleChange}
                     name="clear"
@@ -370,33 +411,53 @@ var Controls = React.createClass({
                     />
             </div>
             <div style={inputWrapStyle}>
-                <span>Width:</span>
                 <input
+                    style={buttonStyle}
+                    type="button"
+                    onClick={this.props.handleChange}
+                    name="randomize"
+                    value="randomize"
+                    />
+                <input
+                    onChange={this.props.handleChange}
+                    style={elementStyle}
+                    type="range"
+                    defaultValue={this.props.percentLife}
+                    name="percentLife"
+                    min="0"
+                    max="1"
+                    step="0.01"/>
+                <span style={elementStyle}>{this.props.percentLife * 100}%</span>
+            </div>
+            <div style={inputWrapStyle}>
+                <span
+                    style={elementStyle}>
+                    Size:</span>
+                <input
+                    style={Object.assign({}, textInputStyle, {width: "2.5em"})}
                     type="number"
                     onChange={this.props.handleChange}
                     name="width"
                     defaultValue={this.props.width}
                     />
-            </div>
-            <div style={inputWrapStyle}>
-                <span>Height:</span>
+                <span
+                    style={elementStyle}>
+                    x</span>
                 <input
+                    style={Object.assign({}, textInputStyle, {width: "2.5em"})}
                     type="number"
                     onChange={this.props.handleChange}
                     name="height"
                     defaultValue={this.props.height}
                     />
+                <input
+                    style={buttonStyle}
+                    type="button"
+                    onClick={this.props.handleChange}
+                    name="applySize"
+                    value="Apply"
+                    />
             </div>
-            <a
-                style={{
-                    margin: "auto",
-                    display: "block",
-                    textAlign: "center",
-                    overflow: "hidden"}}
-                href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-                target="_blank" >
-                https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-            </a>
         </div>
     }
 });
