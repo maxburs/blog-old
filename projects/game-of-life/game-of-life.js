@@ -341,7 +341,8 @@ var Controls = React.createClass({
             display: "inline-block",
             backgroundColor: "rgb(240, 240, 240)",
             padding: vPad + " 0px 0px " + hPad,
-            margin: "4px 6px"
+            margin: "4px 6px",
+            textAlign: "center"
         };
         var elementStyle = {
             verticalAlign: "middle",
@@ -370,7 +371,8 @@ var Controls = React.createClass({
                     maxWidth: "600px",
                     margin: "auto",
                     fontSize: "16px",
-                    overflow: "auto"
+                    overflow: "auto",
+                    textAlign: "center"
                 } },
             React.createElement(
                 "div",
