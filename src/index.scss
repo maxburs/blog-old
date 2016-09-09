@@ -1,24 +1,58 @@
 @font-face {
-  src: url("fonts/Roboto-Regular.ttf") format("truetype");
-  font-family: "Roboto"; }
+  src: url("fonts/anonymous-pro.ttf") format("truetype");
+  font-family: "anonymous-pro"; }
 
-@font-face {
-  src: url("fonts/Roboto-Bold.ttf") format("truetype");
-  font-family: "Roboto";
-  font-weight: bold; }
+$responsive-break: 800px;
+$font-base: 15px;
 
-@font-face {
-  src: url("fonts/RobotoCondensed-Bold.ttf") format("truetype");
-  font-family: "RobotoCondensed";
-  font-weight: bold; }
 
-body {
-  font-family: "Roboto";
+html {
+  font-family: "anonymous-pro";
   margin: 0px;
   padding: 0px;
   font-size: 0px;
-  background-color: white; }
-
-.container {
+  background-color: rgb(30, 30, 30) }
+body {
   margin: auto;
-  max-width: 600px; }
+  max-width: 1000px; }
+
+span, header, p, { //text defaults
+  font-size: $font-base;
+  color: white;
+}
+header {
+  margin: auto;
+  text-align: center;
+  h1 {
+    display: inline;
+    font-size: $font-base * 4;
+  }
+  img {
+    padding-left: 1em;
+    width: 15em;
+    display: inline-block;
+    border-radius: 50%;
+    //vertical-align: -800%;
+    vertical-align: bottom;
+  }
+}
+nav {
+  float: left;
+  width: 200px;
+  > div {
+    font-size: $font-base;
+    color: rgb(204, 204, 204);
+    cursor: pointer;
+  }
+}
+#portfolio {
+  >div{
+    img{
+      width: 200px;
+    }
+  }
+}
+#biography {
+  margin: auto;
+  max-width: 600px;
+}
