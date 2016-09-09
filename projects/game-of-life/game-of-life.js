@@ -105,6 +105,7 @@ var Board = React.createClass({
             interval = window.setInterval(this.update, this.props.interval);
         }
 
+        //build initial cell values
         var initialCellValues = [];
         var size = this.props.height * this.props.width;
         for (var i = 0; i < size; i++) {
@@ -114,9 +115,20 @@ var Board = React.createClass({
                 initialCellValues.push(false);
             }
         }
-        var cellNeighbors = this.buildCellNeighbors();
-        //console.log("cell neighbors: ", cellNeighbors);
-        return { status: initialCellValues, interval: interval, cellNeighbors: cellNeighbors };
+
+        return {
+            status: initialCellValues,
+            interval: interval,
+            cellNeighbors: this.buildCellNeighbors(),
+            cellHeight: 100 / this.props.height + "%",
+            cellWidth: 100 / this.props.width + "%",
+            cellCount: this.props.height * this.props.width,
+            cellStyle: {
+                height: "100%",
+                width: "100%",
+                fontSize: "0px",
+                cursor: "pointer",
+                overflow: "hidden" } };
     },
     //runs when prop(s) are updated
     componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -226,28 +238,19 @@ var Board = React.createClass({
     },
     render: function render() {
         var cells = [];
-        var cellHeight = 100 / this.props.height + "%";
-        var cellWidth = 100 / this.props.width + "%";
-        for (var i = 0; i < this.props.height * this.props.width; i++) {
+        for (var i = 0; i < this.state.cellCount; i++) {
             cells.push(React.createElement(Cell, {
                 status: this.state.status[i] ? "alive" : "dead",
-                height: cellHeight,
-                width: cellWidth,
+                height: this.state.cellHeight,
+                width: this.state.cellWidth,
                 key: i,
                 index: i,
                 handleClick: this.editCell
             }));
         }
-        var style = {
-            height: "100%",
-            width: "100%",
-            fontSize: "0px",
-            cursor: "pointer",
-            overflow: "hidden"
-        };
         return React.createElement(
             "div",
-            { style: style },
+            { style: this.state.cellStyle },
             cells
         );
     }
@@ -346,23 +349,21 @@ var Controls = React.createClass({
         };
         var elementStyle = {
             verticalAlign: "middle",
-            border: "none",
-            padding: "0px " + hPad + " " + vPad + " 0px"
-        };
-        var buttonStyle = {
-            fontSize: "14px",
-            verticalAlign: "middle",
             margin: "0px " + hPad + " " + vPad + " 0px",
             display: "inline-block"
         };
-        var textInputStyle = {
-            verticalAlign: "middle",
+        var buttonStyle = Object.assign({
+            fontSize: "14px"
+        }, elementStyle);
+        var textInputStyle = Object.assign({
             border: "none",
             fontSize: "inherit",
             padding: vPad + " " + hPad,
-            textAlign: "center",
+            textAlign: "center"
+        }, elementStyle);
+        var sliderStyle = Object.assign({
             margin: "0px " + hPad + " " + vPad + " 0px"
-        };
+        }, elementStyle);
         return React.createElement(
             "div",
             { style: {
@@ -385,7 +386,7 @@ var Controls = React.createClass({
                 ),
                 React.createElement("input", {
                     onChange: this.props.handleChange,
-                    style: elementStyle,
+                    style: sliderStyle,
                     type: "range",
                     value: this.props.interval / 1000,
                     name: "interval",
@@ -459,7 +460,7 @@ var Controls = React.createClass({
                 }),
                 React.createElement("input", {
                     onChange: this.props.handleChange,
-                    style: elementStyle,
+                    style: sliderStyle,
                     type: "range",
                     defaultValue: this.props.percentLife,
                     name: "percentLife",
@@ -468,8 +469,8 @@ var Controls = React.createClass({
                     step: "0.01" }),
                 React.createElement(
                     "span",
-                    { style: elementStyle },
-                    this.props.percentLife * 100,
+                    { style: Object.assign({}, elementStyle, { textAlign: "right", width: "38px" }) },
+                    (this.props.percentLife * 100).toFixed(0),
                     "%"
                 )
             ),

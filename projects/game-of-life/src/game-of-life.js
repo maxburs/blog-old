@@ -105,6 +105,7 @@ var Board = React.createClass({
             interval = window.setInterval(this.update, this.props.interval);
         }
 
+        //build initial cell values
         var initialCellValues = [];
         var size = this.props.height * this.props.width;
         for (var i=0; i < size; i++){
@@ -115,9 +116,20 @@ var Board = React.createClass({
                 initialCellValues.push(false);
             }
         }
-        var cellNeighbors = this.buildCellNeighbors();
-        //console.log("cell neighbors: ", cellNeighbors);
-        return {status: initialCellValues, interval: interval, cellNeighbors: cellNeighbors};
+
+        return {
+            status: initialCellValues,
+            interval: interval,
+            cellNeighbors: this.buildCellNeighbors(),
+            cellHeight: 100/this.props.height + "%",
+            cellWidth: 100/this.props.width + "%",
+            cellCount: this.props.height * this.props.width,
+            cellStyle: {
+                height: "100%",
+                width: "100%",
+                fontSize: "0px",
+                cursor: "pointer",
+                overflow: "hidden" }};
     },
     //runs when prop(s) are updated
     componentWillReceiveProps: function(nextProps){
@@ -231,28 +243,19 @@ var Board = React.createClass({
     },
     render: function(){
         var cells = [];
-        var cellHeight = 100/this.props.height + "%";
-        var cellWidth = 100/this.props.width + "%";
-        for (var i = 0; i < this.props.height * this.props.width; i++) {
+        for (var i = 0; i < this.state.cellCount; i++) {
             cells.push(
                 <Cell
                     status={this.state.status[i] ? "alive" : "dead"}
-                    height={cellHeight}
-                    width={cellWidth}
+                    height={this.state.cellHeight}
+                    width={this.state.cellWidth}
                     key={i}
                     index={i}
                     handleClick={this.editCell}
                 />
             )
         }
-        var style={
-            height: "100%",
-            width: "100%",
-            fontSize: "0px",
-            cursor: "pointer",
-            overflow: "hidden"
-        };
-        return <div style={style}>{cells}</div>;
+        return <div style={this.state.cellStyle}>{cells}</div>;
     }
 });
 //Creates a div of a given ratio (width/hight) as large as it can in the given context and then renders whatever is passed as the prop "childComponents" and it's children". Has a 200ms resize timeout for performance.
@@ -340,23 +343,21 @@ var Controls = React.createClass({
         };
         var elementStyle = {
             verticalAlign: "middle",
-            border: "none",
-            padding: "0px " + hPad + " " + vPad + " 0px"
-        };
-        var buttonStyle = {
-            fontSize: "14px",
-            verticalAlign: "middle",
             margin: "0px " + hPad + " " + vPad + " 0px",
             display: "inline-block"
         };
-        var textInputStyle = {
-            verticalAlign: "middle",
+        var buttonStyle = Object.assign({
+            fontSize: "14px"
+        }, elementStyle);
+        var textInputStyle = Object.assign({
             border: "none",
             fontSize: "inherit",
             padding: vPad + " " + hPad,
-            textAlign: "center",
+            textAlign: "center"
+        }, elementStyle);
+        var sliderStyle = Object.assign({
             margin: "0px " + hPad + " " + vPad + " 0px"
-        };
+        }, elementStyle);
         return <div style={{
                             position: "relative",
                             height: "30%",
@@ -371,7 +372,7 @@ var Controls = React.createClass({
                     style={elementStyle}>Refresh Delay</label>
                 <input
                     onChange={this.props.handleChange}
-                    style={elementStyle}
+                    style={sliderStyle}
                     type="range"
                     value={this.props.interval / 1000}
                     name="interval"
@@ -422,14 +423,14 @@ var Controls = React.createClass({
                     />
                 <input
                     onChange={this.props.handleChange}
-                    style={elementStyle}
+                    style={sliderStyle}
                     type="range"
                     defaultValue={this.props.percentLife}
                     name="percentLife"
                     min="0"
                     max="1"
                     step="0.01"/>
-                <span style={elementStyle}>{this.props.percentLife * 100}%</span>
+                <span style={Object.assign({}, elementStyle, {textAlign: "right", width: "38px"})}>{(this.props.percentLife * 100).toFixed(0)}%</span>
             </div>
             <div style={inputWrapStyle}>
                 <span
