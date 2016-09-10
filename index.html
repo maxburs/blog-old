@@ -1,38 +1,74 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="index.css">
         <title>Maxwell Burson's Portfolio</title>
         <meta charset="UTF-8">
         <meta keywords content="portfolio, programmer, maxwell burson, portfolio, web programmer, javascript, biography">
         <meta name="author" content="Maxwell Burson">
         <meta name="description" content="Maxwell Burson's portfolio page">
         <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <script type="text/javascript" src="index.js"></script>
+        <link type="text/css" rel="stylesheet" href="index.css">
     </head>
     <body>
         <header>
-            <h1>Maxwell Burson</h1>
+            <h1>Maxwell<br><span> </span>Burson</h1>
             <img src="images/portrait.jpg" alt="portrait picture of maxwell burson">
         </header>
-        <nav>
-            <div>var game-of-life = {</div>
-        </nav>
-        <section id="portfolio">
-            <div id="game-of-life">
-                <div><p>Build entirely inside of React classes, for better or for worse.</p>
-
-Made by Maxwell Burson for a project on [freecodecamp.com](https://www.freecodecamp.com/).
-
-Learn more about the game of life here: [https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
-                <a href="https://maxwellburson.github.io/projects/game-of-life/game-of-life.html" target="_blank">
-                    <img src="images/projects/game-of-life.png" alt="game of life website thumnail" ></a>
-            </div>
-        </section>
-        <section id="biography">
+        <section id="biography" >
             <p>Hello, this is Maxwell Burson</p>
             <p>I am Junior Front End Web Developer, soon to be Full Stack Developer. My time is currently spent looking for my first industry position and broadening my skill set by working through web based curriculum.</p>
-            <p>My last milestone was finishing the Front End Development section of Free Code Camp. My current progress with that program can be seen at freecodecamp.com/maxwellburson. Online exercises are reinforced with computer science classes I have taken from Allen Hancock College.</p>
+            <p>My last milestone was finishing the Front End Development section of Free Code Camp. My current progress with that program can be seen at <a href="https://www.freecodecamp.com/maxwellburson" target"_blank" >freecodecamp.com/maxwellburson</a>. Online exercises are reinforced with computer science classes I have taken from Allen Hancock College.</p>
             <p>If you are looking for an affable, self motivated developer, be sure to take a look.</p>
+        </section>
+        <div class="edge-grabber">
+            <div class="left-reach"></div>
+            <section>
+                <nav>
+                    <button type="button" name="game-of-life" class="game-of-life selected">Game of Life</button>
+                    <button type="button" name="recipe-box" class="recipe-box" >Recipe Box</button>
+                    <button type="button" name="leaderboard" class="leaderboard" >Leaderboard</button>
+                    <button type="button" name="pomodoro-clock" class="pomodoro-clock" > Pomodoro Clock</button>
+                    <button type="button" name="calculator" class="calculator" >Calculator</button>
+                    <button type="button" name="simon-game" class="simon-game" >Simon Game</button>
+                    <button type="button" name="tic-tac-toe" class="tic-tac-toe" >Tic Tac Toe</button>
+                    <button type="button" name="Quote Machine" class="Quote Mahcine" >Quote Machine</button>
+                    <button type="button" name="weather-widget" class="weather-widget" >Weather Widget</button>
+                </nav>
+                <div class="project" >
+                    <div class="game-of-life selected">
+                        <a class="thumbnail" href="https://maxwellburson.github.io/game-of-life/" target="_blank"><img class="game-of-life" src="images/projects/game-of-life.png" alt="game of life website thumnail" >
+                            </a>
+                        <p>Build entirely inside of React classes, for better or for worse.</p>
+                        <p>Made for <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a>.</p>
+                        <p>Learn more about the game of life: <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank" >en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a><p>
+                        <p>View: <a href="https://maxwellburson.github.io/game-of-life/" target="_blank">maxwellburson.github.io/game-of-life
+                            </a></p>
+                    </div>
+                    <div class="Leaderboard">
+                        test;slgipshvsdiufbnidufnbiudvpvoashdvponsdfpuivndifun
+                        aviudnfibun
+                        asfiuvndoifnbodiubnsa
+                        sdifubndsioufbn dsfuingdiufb dfiguhdf idufhg ui
+                    </div>
+                </div>
+            </section>
+            <div class="right-reach"></div>
+        </div>
+        <section id="contact">
+            <div>
+                <div class="icon-filler"></div><a href="mailto:maxwellburson@gmail.com"> maxwellburson@gmail.com</a>
+            </div>
+            <div>
+                <img src="images/GitHub-Mark-32px.png" class="icon" alt="github icon"> <a href="https://github.com/maxwellburson" target="_blank">GitHub</a>
+            </div>
+            <div>
+                <img src="images/In-Black-48px-R.png" class="icon" alt="linkedin icon">
+                <a href="https://www.linkedin.com/in/maxwellburson" target="_blank">Linkedin</a>
+            </div>
+            <div>
+                <div class="icon-filler"></div><a href="maxwell_burson_resume.pdf" target="_blank"> Resume</a>
+            </div>
         </section>
     </body>
 </html>

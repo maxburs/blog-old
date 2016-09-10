@@ -3,56 +3,140 @@
   font-family: "anonymous-pro"; }
 
 $responsive-break: 800px;
-$font-base: 15px;
+$font-base: 16px;
 
+$grey-dark: rgb(30, 30, 30);
+$grey-medium: rgb(37, 37, 37);
+$grey-light: rgb(51, 51, 51);
 
+$white-light: rgb(212, 212, 212);
+$white-medium: rgb(204, 204, 204);
+$white-dark: rgb(176, 176, 176);
+
+$buffer-std: 1.5em;
+$buffer-small: 1em;
+$buffer-huge: 3em;
+
+//-----------default style------------
 html {
   font-family: "anonymous-pro";
-  margin: 0px;
-  padding: 0px;
-  font-size: 0px;
-  background-color: rgb(30, 30, 30) }
-body {
-  margin: auto;
-  max-width: 1000px; }
-
-span, header, p, { //text defaults
-  font-size: $font-base;
-  color: white;
+  font-size: 16px;
+  background-color: $grey-light;
+  color: $white-light;
 }
+body { margin: 0px; }
+p { line-height: 140% }
+button {
+  font-size: 1em;
+  background-color: transparent;
+}
+button:focus {outline: 0px;}
+a {
+  color: rgb(198, 139, 115);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+//-------------end default style---------------
 header {
-  margin: auto;
+  justify-content: center;
+  margin: 0px opx $buffer-small 0px;
+  padding: $buffer-small;
   text-align: center;
+  background-color: $grey-medium;
   h1 {
-    display: inline;
-    font-size: $font-base * 4;
+    display: inline-block;
+    font-size: 4em;
+    text-align: center;
+    @media (max-width: 789px) { span {display:none} }
+    @media (min-width: 790px) { br {display:none} }
   }
   img {
-    padding-left: 1em;
-    width: 15em;
+    max-width: 15em;
     display: inline-block;
     border-radius: 50%;
-    //vertical-align: -800%;
-    vertical-align: bottom;
-  }
-}
-nav {
-  float: left;
-  width: 200px;
-  > div {
-    font-size: $font-base;
-    color: rgb(204, 204, 204);
-    cursor: pointer;
-  }
-}
-#portfolio {
-  >div{
-    img{
-      width: 200px;
-    }
+    vertical-align: -2em;
   }
 }
 #biography {
-  margin: auto;
+    margin: $buffer-huge auto $buffer-huge auto;
+    max-width: 600px;
+    padding: 0px $buffer-small 0px $buffer-small;
+}
+.edge-grabber {
+  display: flex;
+  align-items: stretch;
+  margin: 0em 0em 0em 0em;
+  .left-reach { //space to the left of portfolio section
+    flex: 1 0px;
+    background-color: $grey-medium;
+  }
+  section { //portfolio
+    max-width: 900px;
+    display: flex;
+    nav {
+      flex: 0 0;
+      background-color: $grey-medium;
+      div, button { //buttons
+        width: 100%;
+        text-align: left;
+        border: none;
+        white-space: nowrap;
+        cursor: pointer;
+        padding: $buffer-small $buffer-std;
+        margin: 0px;
+        color: $white-medium;
+        display: block;
+      }
+      .selected, *:hover,  { background-color: $grey-dark; }
+    }
+    .project {
+      flex: 1 0 0px;
+      .thumbnail {
+        width: 30%;
+        float: right;
+        margin: 0px 0px $buffer-std $buffer-std;
+        display: block;
+        img {
+          width: 100%;
+        }
+      }
+      padding: 0em $buffer-std 0em $buffer-std;
+      background-color: $grey-dark;
+      p { margin: 1em 0em 1em 0em; }
+      a { word-wrap: break-word; }
+      >:not(.selected){
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    section {
+      flex-wrap: wrap;
+      nav {
+        flex: 1 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        div {
+          text-align: center;
+          flex: 1 auto;
+        }
+      }
+    }
+  }
+  .right-reach{
+    flex: 1 0px;
+    background-color: $grey-dark;
+  }
+}
+
+#contact {
   max-width: 600px;
+  margin: $buffer-huge auto $buffer-huge auto;
+  padding: 0px $buffer-small 0px $buffer-small;
+  >div {
+    margin: $buffer-small 0px $buffer-small 0px;
+    >*{ vertical-align: bottom; }
+    .icon { height: 1em; }
+  }
 }
