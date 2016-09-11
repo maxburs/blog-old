@@ -1,10 +1,15 @@
+/*
+  before changing, notes on jank:
+    + height of portfolio content is set manualy
+    + first time using flexboxes - may be messy
+*/
 @font-face {
   src: url("fonts/anonymous-pro.ttf") format("truetype");
   font-family: "anonymous-pro"; }
 
 html {
   font-family: "anonymous-pro";
-  font-size: 16px;
+  font-size: 0px;
   background-color: #333333;
   color: #d4d4d4; }
 
@@ -12,16 +17,19 @@ body {
   margin: 0px; }
 
 p {
-  line-height: 140%; }
+  line-height: 140%;
+  font-size: 16px; }
 
 button {
-  font-size: 1em;
-  background-color: transparent; }
+  font-size: 16px;
+  background-color: transparent;
+  font-family: inherit; }
 
 button:focus {
   outline: 0px; }
 
 a {
+  font-size: 16px;
   color: #c68b73;
   text-decoration: none; }
 
@@ -30,43 +38,51 @@ a:hover {
 
 header {
   justify-content: center;
-  margin: 0px opx 1em 0px;
-  padding: 1em;
+  padding: 16px;
   text-align: center;
   background-color: #252525; }
   header h1 {
     display: inline-block;
-    font-size: 4em;
-    text-align: center; }
-    @media (max-width: 789px) {
+    font-size: 64px;
+    text-align: center;
+    margin: 0px 0px 16px 0px; }
+    @media (max-width: 799px) {
       header h1 span {
         display: none; } }
-    @media (min-width: 790px) {
-      header h1 br {
-        display: none; } }
+    @media (min-width: 800px) {
+      header h1 {
+        margin-right: 0.3em; }
+        header h1 br {
+          display: none; } }
   header img {
-    max-width: 15em;
+    max-width: 240px;
     display: inline-block;
     border-radius: 50%;
-    vertical-align: -2em; }
+    vertical-align: bottom;
+    margin: 4px 0px; }
 
 #biography {
-  margin: 3em auto 3em auto;
+  margin: 48px auto 48px auto;
   max-width: 600px;
-  padding: 0px 1em 0px 1em; }
+  padding: 0px 16px 0px 16px; }
 
 .edge-grabber {
   display: flex;
   align-items: stretch;
-  margin: 0em 0em 0em 0em; }
+  margin: 0px; }
+  .edge-grabber .left-reach, .edge-grabber .right-reach {
+    flex: 1 0; }
   .edge-grabber .left-reach {
-    flex: 1 0px;
     background-color: #252525; }
+  .edge-grabber .right-reach {
+    background-color: #1e1e1e; }
   .edge-grabber section {
     max-width: 900px;
-    display: flex; }
+    display: flex;
+    align-items: stretch;
+    flex-direction: row; }
     .edge-grabber section nav {
-      flex: 0 0;
+      flex: 0 0 auto;
       background-color: #252525; }
       .edge-grabber section nav div, .edge-grabber section nav button {
         width: 100%;
@@ -74,55 +90,68 @@ header {
         border: none;
         white-space: nowrap;
         cursor: pointer;
-        padding: 1em 1.5em;
+        padding: 16px 24px;
         margin: 0px;
         color: #cccccc;
         display: block; }
       .edge-grabber section nav .selected, .edge-grabber section nav *:hover {
         background-color: #1e1e1e; }
     .edge-grabber section .project {
+      height: 500px;
       flex: 1 0 0px;
-      padding: 0em 1.5em 0em 1.5em;
       background-color: #1e1e1e; }
-      .edge-grabber section .project .thumbnail {
-        width: 30%;
-        float: right;
-        margin: 0px 0px 1.5em 1.5em;
-        display: block; }
-        .edge-grabber section .project .thumbnail img {
-          width: 100%; }
-      .edge-grabber section .project p {
-        margin: 1em 0em 1em 0em; }
-      .edge-grabber section .project a {
-        word-wrap: break-word; }
-      .edge-grabber section .project > :not(.selected) {
+      .edge-grabber section .project div {
+        padding: 0px 24px; }
+        .edge-grabber section .project div .thumbnail {
+          width: 30%;
+          float: right;
+          margin: 4px 0px 16px 24px;
+          display: block;
+          font-size: 0px; }
+          .edge-grabber section .project div .thumbnail img {
+            width: 100%; }
+        .edge-grabber section .project div p {
+          margin: 16px 0px; }
+        .edge-grabber section .project div a {
+          word-wrap: break-word; }
+      .edge-grabber section .project > div:not(.selected) {
         display: none; }
   @media (max-width: 700px) {
     .edge-grabber section {
-      flex-direction: column-reverse;
+      flex-direction: column;
       width: 100%; }
       .edge-grabber section nav {
+        transform: rotateX(180deg);
+        -ms-transform: rotateX(180deg);
+        /* IE 9 */
+        -webkit-transform: rotateX(180deg);
+        /* Safari and Chrome */
         flex: 1 1 auto;
         display: flex;
         flex-direction: row;
         overflow: auto; }
         .edge-grabber section nav button {
+          transform: rotateX(180deg);
+          -ms-transform: rotateX(180deg);
+          /* IE 9 */
+          -webkit-transform: rotateX(180deg);
+          /* Safari and Chrome */
           width: auto;
           text-align: center;
-          flex: 1 auto; } }
-  .edge-grabber .right-reach {
-    flex: 1 0px;
-    background-color: #1e1e1e; }
+          flex: 1 auto; }
+      .edge-grabber section .project {
+        flex: 1 0 500px; } }
 
 #contact {
   max-width: 600px;
-  margin: 3em auto 3em auto;
-  padding: 0px 1em 0px 1em; }
+  margin: 48px auto 48px auto;
+  padding: 0px 16px 0px 16px;
+  font-size: 16px; }
   #contact > div {
-    margin: 1em 0px 1em 0px; }
+    margin: 16px 0px 16px 0px; }
     #contact > div > * {
       vertical-align: bottom; }
     #contact > div .icon {
-      height: 1em; }
+      height: 16px; }
 
 /*# sourceMappingURL=index.css.map */

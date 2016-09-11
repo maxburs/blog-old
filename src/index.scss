@@ -1,3 +1,8 @@
+/*
+  before changing, notes on jank:
+    + height of portfolio content is set manualy
+    + first time using flexboxes - may be messy
+*/
 @font-face {
   src: url("fonts/anonymous-pro.ttf") format("truetype");
   font-family: "anonymous-pro"; }
@@ -13,25 +18,30 @@ $white-light: rgb(212, 212, 212);
 $white-medium: rgb(204, 204, 204);
 $white-dark: rgb(176, 176, 176);
 
-$buffer-std: 1.5em;
-$buffer-small: 1em;
-$buffer-huge: 3em;
+$buffer-std: $font-base * 1.5;
+$buffer-small: $font-base;
+$buffer-huge: $font-base * 3;
 
 //-----------default style------------
 html {
   font-family: "anonymous-pro";
-  font-size: 16px;
+  font-size: 0px;
   background-color: $grey-light;
   color: $white-light;
 }
 body { margin: 0px; }
-p { line-height: 140% }
+p {
+  line-height: 140%;
+  font-size: $font-base;
+}
 button {
-  font-size: 1em;
+  font-size: $font-base;
   background-color: transparent;
+  font-family: inherit;
 }
 button:focus {outline: 0px;}
 a {
+  font-size: $font-base;
   color: rgb(198, 139, 115);
   text-decoration: none;
 }
@@ -39,22 +49,26 @@ a:hover { text-decoration: underline; }
 //-------------end default style---------------
 header {
   justify-content: center;
-  margin: 0px opx $buffer-small 0px;
   padding: $buffer-small;
   text-align: center;
   background-color: $grey-medium;
   h1 {
     display: inline-block;
-    font-size: 4em;
+    font-size: 4 * $font-base;
     text-align: center;
-    @media (max-width: 789px) { span {display:none} }
-    @media (min-width: 790px) { br {display:none} }
+    margin: 0px 0px $buffer-small 0px;
+    @media (max-width: 799px) {span {display:none} }
+    @media (min-width: 800px) {
+      br {display:none}
+      margin-right: 0.3em;
+    }
   }
   img {
-    max-width: 15em;
+    max-width: $font-base * 15;
     display: inline-block;
     border-radius: 50%;
-    vertical-align: -2em;
+    vertical-align: bottom;
+    margin: 4px 0px;
   }
 }
 #biography {
@@ -65,16 +79,21 @@ header {
 .edge-grabber {
   display: flex;
   align-items: stretch;
-  margin: 0em 0em 0em 0em;
-  .left-reach { //space to the left of portfolio section
-    flex: 1 0px;
+  margin: 0px;
+  .left-reach, .right-reach {flex: 1 0; }
+  .left-reach {
     background-color: $grey-medium;
+  }
+  .right-reach {
+    background-color: $grey-dark;
   }
   section { //portfolio
     max-width: 900px;
     display: flex;
+    align-items: stretch;
+    flex-direction: row;
     nav {
-      flex: 0 0;
+      flex: 0 0 auto;
       background-color: $grey-medium;
       div, button { //buttons
         width: 100%;
@@ -90,45 +109,55 @@ header {
       .selected, *:hover,  { background-color: $grey-dark; }
     }
     .project {
+      height: 500px;
       flex: 1 0 0px;
-      .thumbnail {
-        width: 30%;
-        float: right;
-        margin: 0px 0px $buffer-std $buffer-std;
-        display: block;
-        img {
-          width: 100%;
-        }
-      }
-      padding: 0em $buffer-std 0em $buffer-std;
       background-color: $grey-dark;
-      p { margin: 1em 0em 1em 0em; }
-      a { word-wrap: break-word; }
-      >:not(.selected){
+      div {
+        .thumbnail {
+          width: 30%;
+          float: right;
+          margin: 4px 0px $buffer-small $buffer-std;
+          display: block;
+          font-size: 0px;
+          img {
+            width: 100%;
+          }
+        }
+        padding: 0px $buffer-std;
+        p { margin: $buffer-small 0px; }
+        a { word-wrap: break-word; }
+      }
+      >div:not(.selected){
         display: none;
       }
     }
   }
   @media (max-width: 700px) {
     section {
-      flex-direction: column-reverse;
+      flex-direction: column;
       width: 100%;
       nav {
+
+        transform:rotateX(180deg);
+        -ms-transform:rotateX(180deg); /* IE 9 */
+        -webkit-transform:rotateX(180deg); /* Safari and Chrome */
         flex: 1 1 auto;
         display: flex;
         flex-direction: row;
         overflow: auto;
         button {
+          transform:rotateX(180deg);
+          -ms-transform:rotateX(180deg); /* IE 9 */
+          -webkit-transform:rotateX(180deg); /* Safari and Chrome */
           width: auto;
           text-align: center;
           flex: 1 auto;
         }
       }
+      .project {
+        flex: 1 0 500px;
+      }
     }
-  }
-  .right-reach{
-    flex: 1 0px;
-    background-color: $grey-dark;
   }
 }
 
@@ -136,9 +165,11 @@ header {
   max-width: 600px;
   margin: $buffer-huge auto $buffer-huge auto;
   padding: 0px $buffer-small 0px $buffer-small;
+  //text-align: center;
+  font-size: $font-base;
   >div {
     margin: $buffer-small 0px $buffer-small 0px;
     >*{ vertical-align: bottom; }
-    .icon { height: 1em; }
+    .icon { height: $font-base; }
   }
 }
