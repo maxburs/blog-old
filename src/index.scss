@@ -3,11 +3,23 @@
     + first time using flexboxes - may be messy
 */
 
+@import "font-awesome/font-awesome.scss";
+
+.#{$fa-css-prefix} {
+  display: inline-block;
+  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
 $responsive-break: 800px;
 $font-base: 16px;
 $font-large: 16px;
 
-$grey-dark: rgb(30, 30, 30);
+$grey-dark: rgb(32, 32, 32);
 $grey-medium: rgb(36, 36, 36);
 $grey-light: rgb(51, 51, 51);
 
@@ -15,6 +27,9 @@ $grey-light: rgb(51, 51, 51);
 $white-light: rgb(219, 219, 219);
 $white-medium: rgb(212, 212, 212);
 $white-dark: rgb(176, 176, 176);
+
+$color-link: hsl(17, 42%, 61%);
+$color-link-bright: hsl(17, 47%, 61%);
 
 $buffer-std: $font-base * 1.5;
 $buffer-small: $font-base;
@@ -40,7 +55,7 @@ button {
 button:focus {outline: 0px;}
 a {
   font-size: $font-base;
-  color: rgb(198, 139, 115);
+  color: $color-link;
   text-decoration: none;
 }
 a:hover { text-decoration: underline; }
@@ -54,20 +69,28 @@ header {
     display: inline-block;
     font-size: 4 * $font-base;
     text-align: center;
-    margin: 0px 0px 12px 0px;
+    margin: 0px 0px 0px 0px;
     font-weight: 100;
-    @media (max-width: 799px) {span {display:none} }
-    @media (min-width: 800px) {
-      br {display:none}
-      margin-right: 0.3em;
     }
-  }
   img {
     max-width: $font-base * 13;
     display: inline-block;
     border-radius: 50%;
     vertical-align: bottom;
     margin: 4px 0px;
+  }
+  
+  @media (max-width: 799px) { h1 > span { display:none; } }
+  @media (min-width: 800px) {
+    h1 br { display: none };
+  }
+}
+@media(min-width: 525px) {
+  header {
+    h1 { margin-right: 12px; }
+    > br {
+      display: none;
+    }
   }
 }
 #biography {
@@ -77,6 +100,9 @@ header {
     p {
       font-size: $font-large;
       color: $white-light;
+    }
+    a {
+      color: $color-link-bright;
     }
 }
 .edge-grabber {
@@ -131,7 +157,7 @@ header {
           margin: $buffer-small 0px;
           font-size: $font-large;
         }
-        a { word-wrap: break-word; }
+        a {word-wrap: break-word; }
         span {font-size: $font-large; }
         ul {
           font-size: $font-large;
@@ -179,10 +205,17 @@ header {
   margin: $buffer-huge auto $buffer-huge auto;
   padding: 0px $buffer-small 0px $buffer-small;
   //text-align: center;
-  font-size: $font-base;
   >div {
+    font-size: $font-base;
     margin: $buffer-small 0px $buffer-small 0px;
-    >*{ vertical-align: bottom; }
-    .icon { height: $font-base; }
+    >* {
+      vertical-align: center;
+    }
+    a {
+      color: $color-link-bright;
+    }
+    >.fa {
+      color: $white-dark;
+    }
   }
 }
