@@ -99,13 +99,15 @@ header {
         display: none; }
   @media (max-width: 700px) {
     .edge-grabber section {
-      flex-wrap: wrap; }
+      flex-direction: column-reverse;
+      width: 100%; }
       .edge-grabber section nav {
-        flex: 1 100%;
+        flex: 1 1 auto;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap; }
-        .edge-grabber section nav div {
+        overflow: auto; }
+        .edge-grabber section nav button {
+          width: auto;
           text-align: center;
           flex: 1 auto; } }
   .edge-grabber .right-reach {
