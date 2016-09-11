@@ -27,7 +27,6 @@ html {
   font-size: 0px;
   background-color: $grey-light;
   color: $white-medium;
-  overflow: hide;
 }
 body { margin: 0px; }
 p {
@@ -117,6 +116,8 @@ header {
       flex: 0 1 100%;
       background-color: $grey-dark;
       div {
+        overflow: hide;
+        padding: 0px $buffer-std;
         .thumbnail {
           width: 30%;
           float: right;
@@ -127,7 +128,6 @@ header {
             width: 100%;
           }
         }
-        padding: 0px $buffer-std;
         p {
           margin: $buffer-small 0px;
           font-size: $font-large;
