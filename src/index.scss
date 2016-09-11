@@ -1,6 +1,5 @@
 /*
   before changing, notes on jank:
-    + height of portfolio content is set manualy
     + first time using flexboxes - may be messy
 */
 
@@ -56,6 +55,7 @@ header {
     font-size: 4 * $font-base;
     text-align: center;
     margin: 0px 0px 12px 0px;
+    font-weight: 100;
     @media (max-width: 799px) {span {display:none} }
     @media (min-width: 800px) {
       br {display:none}
@@ -112,7 +112,6 @@ header {
       .selected, *:hover,  { background-color: $grey-dark; }
     }
     .project {
-      //height: 550px;
       flex: 0 1 100%;
       background-color: $grey-dark;
       div {

@@ -1,14 +1,12 @@
 /*
   before changing, notes on jank:
-    + height of portfolio content is set manualy
     + first time using flexboxes - may be messy
 */
 html {
   font-family: 'Open Sans', sans-serif;
   font-size: 0px;
   background-color: #333333;
-  color: #d4d4d4;
-  overflow: hide; }
+  color: #d4d4d4; }
 
 body {
   margin: 0px; }
@@ -42,7 +40,8 @@ header {
     display: inline-block;
     font-size: 64px;
     text-align: center;
-    margin: 0px 0px 12px 0px; }
+    margin: 0px 0px 12px 0px;
+    font-weight: 100; }
     @media (max-width: 799px) {
       header h1 span {
         display: none; } }
@@ -100,6 +99,7 @@ header {
       flex: 0 1 100%;
       background-color: #1e1e1e; }
       .edge-grabber section .project div {
+        overflow: hide;
         padding: 0px 24px; }
         .edge-grabber section .project div .thumbnail {
           width: 30%;
