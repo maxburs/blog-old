@@ -114,6 +114,11 @@ header {
           margin: 16px 0px; }
         .edge-grabber section .project div a {
           word-wrap: break-word; }
+        .edge-grabber section .project div span {
+          font-size: 16px; }
+        .edge-grabber section .project div ul {
+          font-size: 16px;
+          margin-top: 0.7em; }
       .edge-grabber section .project > div:not(.selected) {
         display: none; }
   @media (max-width: 700px) {

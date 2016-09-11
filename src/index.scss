@@ -126,6 +126,11 @@ header {
         padding: 0px $buffer-std;
         p { margin: $buffer-small 0px; }
         a { word-wrap: break-word; }
+        span {font-size: $font-base; }
+        ul {
+          font-size: $font-base;
+          margin-top: 0.7em;
+        }
       }
       >div:not(.selected){
         display: none;
