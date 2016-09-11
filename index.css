@@ -7,7 +7,8 @@ html {
   font-family: 'Open Sans', sans-serif;
   font-size: 0px;
   background-color: #333333;
-  color: #d4d4d4; }
+  color: #d4d4d4;
+  overflow: hide; }
 
 body {
   margin: 0px; }
