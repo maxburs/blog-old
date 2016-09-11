@@ -117,7 +117,9 @@ header {
           font-size: 16px; }
         .edge-grabber section .project div ul {
           font-size: 16px;
-          margin-top: 0.7em; }
+          margin-top: 0.7em;
+          list-style-type: none;
+          padding-left: 24px; }
       .edge-grabber section .project > div:not(.selected) {
         display: none; }
   @media (max-width: 700px) {

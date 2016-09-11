@@ -136,6 +136,8 @@ header {
         ul {
           font-size: $font-large;
           margin-top: 0.7em;
+          list-style-type: none;
+          padding-left: $buffer-std;
         }
       }
       >div:not(.selected){
