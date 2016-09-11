@@ -1,93 +1,142 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="index.css">
         <title>Maxwell Burson's Portfolio</title>
+        <meta charset="UTF-8">
+        <meta keywords content="portfolio, programmer, maxwell burson, portfolio, web programmer, javascript, biography">
+        <meta name="author" content="Maxwell Burson">
         <meta name="description" content="Maxwell Burson's portfolio page">
         <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+        <script type="text/javascript" src="index.js"></script>
+        <link type="text/css" rel="stylesheet" href="index.css">
     </head>
     <body>
-        <div class="container">
-            <div id="head">
-                <h1>Maxwell<br id="responsive"> Burson</h1>
-                <img id="selfie" src="images/selfie.jpg" alt="selfie photograph">
-            </div>
-            <hr>
-            <h2>Projects</h2>
-            <div class="topic-body">
-                <a href="https://maxwellburson.github.io/projects/game-of-life/game-of-life.html" class="img-link" target="_blank" >
-                    <div>
-                        <div class="description">Game of Life</div>
-                        <div class="border"><img src="images/game-of-life.png" alt="game of life website thumbnail" class="thumbnail"></div>
+        <header>
+            <h1>Maxwell<br><span> </span>Burson</h1>
+            <img src="images/portrait.jpg" alt="portrait picture of maxwell burson">
+        </header>
+        <section id="biography" >
+            <p>Hello, this is Maxwell Burson</p>
+            <p>    I am Junior Front End Web Developer, soon to be Full Stack Developer. My time is currently spent looking for my first industry position and broadening my skill set by working through web based curriculum.</p>
+            <p>    My last milestone was finishing the Front End Development section of Free Code Camp. My current progress with that program can be seen at <a href="https://www.freecodecamp.com/maxwellburson" target"_blank" >freecodecamp.com/maxwellburson</a>. Online exercises are reinforced with computer science classes I have taken from Allen Hancock College.</p>
+            <p>    If you are looking for an affable, self motivated developer, be sure to take a look.</p>
+        </section>
+        <div class="edge-grabber">
+            <div class="left-reach"></div>
+            <section>
+                <nav>
+                    <button type="button" name="game-of-life" class="game-of-life selected">Game of Life</button>
+                    <button type="button" name="recipe-box" class="recipe-box" >Recipe Box</button>
+                    <button type="button" name="leaderboard" class="leaderboard" >Leaderboard</button>
+                    <button type="button" name="pomodoro-clock" class="pomodoro-clock" > Pomodoro Clock</button>
+                    <button type="button" name="calculator" class="calculator" >Calculator</button>
+                    <button type="button" name="simon-game" class="simon-game" >Simon Game</button>
+                    <button type="button" name="tic-tac-toe" class="tic-tac-toe" >Tic Tac Toe</button>
+                    <button type="button" name="quote-machine" class="quote-machine" >Quote Machine</button>
+                    <button type="button" name="weather-widget" class="weather-widget" >Weather Widget</button>
+                </nav>
+                <div class="project" >
+                    <div class="game-of-life selected">
+                        <a class="thumbnail" href="https://maxwellburson.github.io/game-of-life/" target="_blank"><img src="images/projects/game-of-life.png" alt="game of life website thumnail" >
+                            </a>
+                        <p>View here: <a href="https://maxwellburson.github.io/game-of-life/" target="_blank">maxwellburson.github.io/game-of-life
+                        </a></p>
+                        <span class="title" />Learning Focus:</span>
+                        <ul>
+                            <li>React</li>
+                            <li>inline styles</li>
+                        </ul>
+                        <p>Build entirely inside of React classes, for better or for worse.</p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum.</p>
+                        <p>Learn more about the game of life: <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank" >en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a></p>
                     </div>
-                </a>
-                <a href="http://codepen.io/pants_on_fire/full/LkyYLE/" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">recipe box</div>
-                        <div class="border"><img src="images/recipe-box.png" alt="recipe box website thumbnail" class="thumbnail"></div>
+                    <div class="recipe-box">
+                        <a class="thumbnail" href="http://codepen.io/pants_on_fire/full/LkyYLE/" target="_blank"><img src="images/projects/recipe-box.png" alt="recipe box website thumnail" >
+                            </a>
+                        <p>View here: <a href="http://codepen.io/pants_on_fire/full/LkyYLE/" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <span class="title" />Learning Focus:</span>
+                        <ul>
+                            <li>React</li>
+                            <li>Sass</li>
+                        </ul>
+                        <p>It came as quite that shock that webstorage is just a string. Storing everything as a JSON and keeping it current was an unexpected problem, but ultimatly not very much trouble. Like with many of my project I spent the most time trying to make the webpage look the way I want. In retrospect I would problby not have much trouble doing many of the things I had trouble with... I would just use javascript. If anyone has any hot pizza making tips I'll take them.</p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="http://codepen.io/pants_on_fire/full/WxpGxB/" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">leaderboard</div>
-                        <div class="border"><img src="images/leaderboard.png" alt="leaderboard website thumbnail" class="thumbnail"></div>
+                    <div class="leaderboard">
+                        <a class="thumbnail" href="http://codepen.io/pants_on_fire/full/WxpGxB/" target="_blank"><img src="images/projects/leaderboard.png" alt="leaderboard website thumnail" >
+                            </a>
+                        <p>View here: <a href="http://codepen.io/pants_on_fire/full/LkyYLE/" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <span class="title" />Learning Focus:</span>
+                        <ul>
+                            <li>React</li>
+                            <li>Sass</li>
+                        </ul>
+                        <p>First time making a http request without jQuery! I'm not sure if I've gotten that much better or if jQuery is just confusing but it went much smoother this time than the last few. Pretty happy with the way this one turned out. Played around with tables for the first time and tried a few new css selectors and the css and html was done pretty quick. </p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="projects/pomodoro-clock/pomodoro-clock.html" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">pomodoro clock</div>
-                        <div class="border"><img src="images/pomodoro-clock.png" alt="pomodoro clock website thumbnail" class="thumbnail"></div>
+                    <div class="pomodoro-clock">
+                        <a class="thumbnail" href="projects/pomodoro-clock/index.html" target="_blank"><img src="images/projects/pomodoro-clock.png" alt="pomodoro clock website thumnail" >
+                            </a>
+                        <p>View here: <a href="projects/pomodoro-clock/index.html" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="projects/calculator/calculator.html" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">calculator</div>
-                        <div class="border"><img src="images/calculator.png" alt="calculator website thumbnail" class="thumbnail"></div>
+                    <div class="calculator">
+                        <a class="thumbnail" href="projects/calculator/index.html" target="_blank"><img src="images/projects/calculator.png" alt="calculator website thumnail" >
+                            </a>
+                        <p>View here: <a href="images/projects/calculator.png" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="projects/simon/simon.html" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">simon game</div>
-                        <div class="border"><img src="images/simon.png" alt="simon website thumbnail" class="thumbnail"></div>
+                    <div class="simon-game">
+                        <a class="thumbnail" href="projects/simon-game/index.html" target="_blank"><img src="images/projects/simon-game.png" alt="simon game website thumnail" >
+                            </a>
+                        <p>View here: <a href="projects/simon-game/index.html" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="projects/tic-tac-toe/tic-tac-toe.html" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">tic tac toe</div>
-                        <div class="border"><img src="images/tic-tac-toe.png" alt="tic tac toe website thumbnail" class="thumbnail"></div>
+                    <div class="tic-tac-toe">
+                        <a class="thumbnail" href="projects/tic-tac-toe/index.html" target="_blank"><img src="images/projects/tic-tac-toe.png" alt="tic tac toe website thumnail" >
+                            </a>
+                        <p>View here: <a href="projects/tic-tac-toe/index.html" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="http://codepen.io/pants_on_fire/full/mPQJgO/" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">quote machine</div>
-                        <div class="border"><img src="images/random-quotes.png" alt="random quotes website thumbnail" class="thumbnail"></div>
+                    <div class="quote-machine">
+                        <a class="thumbnail" href="http://codepen.io/pants_on_fire/full/mPQJgO/" target="_blank"><img src="images/projects/quote-machine.png" alt="quote machine website thumnail" >
+                            </a>
+                        <p>View here: <a href="http://codepen.io/pants_on_fire/full/mPQJgO/" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-                <a href="http://codepen.io/pants_on_fire/full/EKGwLe/" class="img-link" target="_blank">
-                    <div>
-                        <div class="description">weather widget</div>
-                        <div class="border"><img src="images/weather-widget.png" alt="weather widget website thumbnail" class="thumbnail"></div>
+                    <div class="weather-widget">
+                        <a class="thumbnail" href="http://codepen.io/pants_on_fire/full/EKGwLe/" target="_blank"><img src="images/projects/weather-widget.png" alt="weather widget website thumnail" >
+                            </a>
+                        <p>View here: <a href="http://codepen.io/pants_on_fire/full/EKGwLe/" target="_blank">codepen.io/pants_on_fire/full/LkyYLE
+                        </a></p>
+                        <p>Made as part of the <a href="https://www.freecodecamp.com/" target="_blank" > freecodecamp.com</a> curriculum</p>
                     </div>
-                </a>
-            </div>
-            <hr>
-            <h3>Biography</h3>
-            <div class="topic-body">
-            <p>I am Junior Front End Web Developer, soon to be Full Stack Developer. My time is currently spent looking for my first industry position and broadening my skill set by working through web based curriculum.</p>
-            <p>My last milestone was finishing the Front End Development section of <a href="https://www.freecodecamp.com/maxwellburson" target="_blank">freecodecamp.com</a. My current progress with that program can be seen at freecodecamp.com/maxwellburson. Online exercises are reinforced with computer science classes I have taken from <a href="http://www.hancockcollege.edu/" target="_blank">Allen Hancock College</a>.</p>
-            <p>If you are looking for an affable, self motivated developer, be sure to give me a shake.</p>
-            </div>
-            <hr>
-            <h4>Contact</h4>
-            <div class="topic-body" id="get-in-touch">
+                </div>
+            </section>
+            <div class="right-reach"></div>
+        </div>
+        <section id="contact">
+            <div>
                 <div class="icon-filler"></div><a href="mailto:maxwellburson@gmail.com"> maxwellburson@gmail.com</a>
-                <br>
-                <a href="https://github.com/maxwellburson" target="_blank"><img src="images/GitHub-Mark-32px.png" class="icon" alt="github icon"> GitHub</a>
-                <br>
-                <a href="https://www.linkedin.com/in/maxwellburson" target="_blank"><img src="images/In-Black-48px-R.png" class="icon" alt="linkedin icon"> Linkedin</a>
-                <br>
+            </div>
+            <div>
+                <img src="images/In-Black-48px-R.png" class="icon" alt="linkedin icon">
+                <a href="https://www.linkedin.com/in/maxwellburson" target="_blank">Linkedin</a>
+            </div>
+            <div>
+                <img src="images/GitHub-Mark-32px.png" class="icon" alt="github icon"> <a href="https://github.com/maxwellburson" target="_blank">GitHub</a>
+            </div>
+            <div>
                 <div class="icon-filler"></div><a href="maxwell_burson_resume.pdf" target="_blank"> Resume</a>
             </div>
-        </div>
+        </section>
     </body>
 </html>

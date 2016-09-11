@@ -1,121 +1,186 @@
-@font-face {
-  src: url("fonts/Roboto-Regular.ttf") format("truetype");
-  font-family: "Roboto"; }
+/*
+  before changing, notes on jank:
+    + height of portfolio content is set manualy
+    + first time using flexboxes - may be messy
+*/
 
-@font-face {
-  src: url("fonts/Roboto-Bold.ttf") format("truetype");
-  font-family: "Roboto";
-  font-weight: bold; }
+$responsive-break: 800px;
+$font-base: 16px;
+$font-large: 16px;
 
-@font-face {
-  src: url("fonts/RobotoCondensed-Bold.ttf") format("truetype");
-  font-family: "RobotoCondensed";
-  font-weight: bold; }
+$grey-dark: rgb(30, 30, 30);
+$grey-medium: rgb(36, 36, 36);
+$grey-light: rgb(51, 51, 51);
 
-body {
-  font-family: "Roboto";
-  margin: 0px;
-  padding: 0px;
+
+$white-light: rgb(219, 219, 219);
+$white-medium: rgb(212, 212, 212);
+$white-dark: rgb(176, 176, 176);
+
+$buffer-std: $font-base * 1.5;
+$buffer-small: $font-base;
+$buffer-huge: $font-base * 3;
+
+//-----------default style------------
+html {
+  font-family: 'Open Sans', sans-serif;
   font-size: 0px;
-  background-color: white; }
-
-.container {
-  margin: auto;
-  max-width: 600px; }
-
-/*head stuff under here*/
-#head {
-  overflow: auto;
-  text-align: center; }
-
-#head > * {
-  vertical-align: bottom;
-  margin: 6px; }
-
-h1 {
-  font-size: 58px;
-  font-weight: bold;
-  font-family: "RobotoCondensed";
-  display: inline-block;
-  /*forces h1 to break between first and last names*/ }
-
-@media (min-width: 550px) {
-  h1 #responsive {
-    display: none; } }
-
-#selfie {
-  border-radius: 50%;
-  height: 144px;
-  width: 144px; }
-
-/*stuff for entire body goes under here*/
-hr {
-  border: 0px;
-  margin: 18px 12px 18px 12px;
-  background-color: black;
-  height: 3px; }
-
-h2, h3, h4, h5 {
-  font-size: 24px;
-  margin: 6px; }
-
-.topic-body {
-  margin: 6px 6px 6px 18px; }
-
-a {
-  color: inherit;
-  text-decoration: none;
-  color: #FF530D;
-  font-size: 16px; }
-
-a:hover {
-  color: #a63000; }
-
-.icon {
-  height: 16px;
-  width: 16px;
-  vertical-align: -1px; }
-
-.icon-filler {
-  display: inline-block;
-  height: 16px;
-  width: 16px; }
-
+  background-color: $grey-light;
+  color: $white-medium;
+}
+body { margin: 0px; }
 p {
-  margin: .5em 0em 1em 0em;
-  font-size: 16px; }
-
-/*topic specific formatting under here*/
-#get-in-touch {
-  line-height: 1.4; }
-
-.img-link {
-  overflow: auto;
+  line-height: 140%;
+  font-size: $font-base;
+}
+button {
+  font-size: $font-base;
+  background-color: transparent;
+  font-family: inherit;
+}
+button:focus {outline: 0px;}
+a {
+  font-size: $font-base;
+  color: rgb(198, 139, 115);
   text-decoration: none;
-  display: inline-block; }
+}
+a:hover { text-decoration: underline; }
+//-------------end default style---------------
+header {
+  justify-content: center;
+  padding: $buffer-small;
+  text-align: center;
+  background-color: $grey-medium;
+  h1 {
+    display: inline-block;
+    font-size: 4 * $font-base;
+    text-align: center;
+    margin: 0px 0px 12px 0px;
+    @media (max-width: 799px) {span {display:none} }
+    @media (min-width: 800px) {
+      br {display:none}
+      margin-right: 0.3em;
+    }
+  }
+  img {
+    max-width: $font-base * 13;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: bottom;
+    margin: 4px 0px;
+  }
+}
+#biography {
+    margin: $buffer-huge auto $buffer-huge auto;
+    max-width: 600px;
+    padding: 0px $buffer-small 0px $buffer-small;
+    p {
+      font-size: $font-large;
+      color: $white-light;
+    }
+}
+.edge-grabber {
+  display: flex;
+  align-items: stretch;
+  margin: 0px;
+  .left-reach, .right-reach {flex: 1 0; }
+  .left-reach {
+    background-color: $grey-medium;
+  }
+  .right-reach {
+    background-color: $grey-dark;
+  }
+  section { //portfolio
+    flex: 0 1 900px;
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    nav {
+      flex: 0 0 auto;
+      background-color: $grey-medium;
+      div, button { //buttons
+        width: 100%;
+        text-align: left;
+        border: none;
+        white-space: nowrap;
+        cursor: pointer;
+        padding: $buffer-small $buffer-std;
+        margin: 0px;
+        color: $white-medium;
+        display: block;
+      }
+      .selected, *:hover,  { background-color: $grey-dark; }
+    }
+    .project {
+      //height: 550px;
+      flex: 0 1 100%;
+      background-color: $grey-dark;
+      div {
+        .thumbnail {
+          width: 30%;
+          float: right;
+          margin: 4px 0px $buffer-small $buffer-std;
+          display: block;
+          font-size: 0px;
+          img {
+            width: 100%;
+          }
+        }
+        padding: 0px $buffer-std;
+        p {
+          margin: $buffer-small 0px;
+          font-size: $font-large;
+        }
+        a { word-wrap: break-word; }
+        span {font-size: $font-large; }
+        ul {
+          font-size: $font-large;
+          margin-top: 0.7em;
+        }
+      }
+      >div:not(.selected){
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    section {
+      flex-direction: column;
+      width: 100%;
+      nav {
 
-@media (max-width: 450px) {
-  .img-link {
-    width: 100%; } }
+        transform:rotateX(180deg);
+        -ms-transform:rotateX(180deg); /* IE 9 */
+        -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: row;
+        overflow: auto;
+        button {
+          transform:rotateX(180deg);
+          -ms-transform:rotateX(180deg); /* IE 9 */
+          -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+          width: auto;
+          text-align: center;
+          flex: 1 auto;
+        }
+      }
+      .project {
+        flex: 1 0 500px;
+      }
+    }
+  }
+}
 
-@media (min-width: 451px) {
-  .img-link {
-    width: 50%; } }
-
-.img-link > div {
-  //margin: 0px;
-  position: relative;
-  margin: 0px 12px 12px 0px; }
-
-.img-link > div > .description {
-  background-color: white;
-  font-size: 17px;
-  display: inline-block;
-  position: absolute;
-  bottom: 0px;
-  left: 12px;
-  padding: 12px 18px 3px 18px; }
-
-.img-link > div > .border > img {
-  vertical-align: bottom;
-  width: 100%; }
+#contact {
+  max-width: 600px;
+  margin: $buffer-huge auto $buffer-huge auto;
+  padding: 0px $buffer-small 0px $buffer-small;
+  //text-align: center;
+  font-size: $font-base;
+  >div {
+    margin: $buffer-small 0px $buffer-small 0px;
+    >*{ vertical-align: bottom; }
+    .icon { height: $font-base; }
+  }
+}
