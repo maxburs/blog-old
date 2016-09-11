@@ -3,19 +3,18 @@
     + height of portfolio content is set manualy
     + first time using flexboxes - may be messy
 */
-@font-face {
-  src: url("fonts/anonymous-pro.ttf") format("truetype");
-  font-family: "anonymous-pro"; }
 
 $responsive-break: 800px;
 $font-base: 16px;
+$font-large: 16px;
 
 $grey-dark: rgb(30, 30, 30);
-$grey-medium: rgb(37, 37, 37);
+$grey-medium: rgb(36, 36, 36);
 $grey-light: rgb(51, 51, 51);
 
-$white-light: rgb(212, 212, 212);
-$white-medium: rgb(204, 204, 204);
+
+$white-light: rgb(219, 219, 219);
+$white-medium: rgb(212, 212, 212);
 $white-dark: rgb(176, 176, 176);
 
 $buffer-std: $font-base * 1.5;
@@ -24,10 +23,10 @@ $buffer-huge: $font-base * 3;
 
 //-----------default style------------
 html {
-  font-family: "anonymous-pro";
+  font-family: 'Open Sans', sans-serif;
   font-size: 0px;
   background-color: $grey-light;
-  color: $white-light;
+  color: $white-medium;
 }
 body { margin: 0px; }
 p {
@@ -56,7 +55,7 @@ header {
     display: inline-block;
     font-size: 4 * $font-base;
     text-align: center;
-    margin: 0px 0px $buffer-small 0px;
+    margin: 0px 0px 12px 0px;
     @media (max-width: 799px) {span {display:none} }
     @media (min-width: 800px) {
       br {display:none}
@@ -64,7 +63,7 @@ header {
     }
   }
   img {
-    max-width: $font-base * 15;
+    max-width: $font-base * 13;
     display: inline-block;
     border-radius: 50%;
     vertical-align: bottom;
@@ -75,6 +74,10 @@ header {
     margin: $buffer-huge auto $buffer-huge auto;
     max-width: 600px;
     padding: 0px $buffer-small 0px $buffer-small;
+    p {
+      font-size: $font-large;
+      color: $white-light;
+    }
 }
 .edge-grabber {
   display: flex;
@@ -88,7 +91,7 @@ header {
     background-color: $grey-dark;
   }
   section { //portfolio
-    max-width: 900px;
+    flex: 0 1 900px;
     display: flex;
     align-items: stretch;
     flex-direction: row;
@@ -109,8 +112,8 @@ header {
       .selected, *:hover,  { background-color: $grey-dark; }
     }
     .project {
-      height: 500px;
-      flex: 1 0 0px;
+      //height: 550px;
+      flex: 0 1 100%;
       background-color: $grey-dark;
       div {
         .thumbnail {
@@ -124,11 +127,14 @@ header {
           }
         }
         padding: 0px $buffer-std;
-        p { margin: $buffer-small 0px; }
+        p {
+          margin: $buffer-small 0px;
+          font-size: $font-large;
+        }
         a { word-wrap: break-word; }
-        span {font-size: $font-base; }
+        span {font-size: $font-large; }
         ul {
-          font-size: $font-base;
+          font-size: $font-large;
           margin-top: 0.7em;
         }
       }
