@@ -25,8 +25,6 @@ function clearSelected(){
 window.onload = function(){
     var buttons = document.getElementsByTagName("nav")[0].children
     for (var key = 0; key < buttons.length; key++){
-        //console.log(key);
-        //console.log(buttons[key]);
         buttons[key].addEventListener("click", changeProject);
     }
 };
