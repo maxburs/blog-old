@@ -181,7 +181,7 @@ header {
         transform:rotateX(180deg);
         -ms-transform:rotateX(180deg); /* IE 9 */
         -webkit-transform:rotateX(180deg); /* Safari and Chrome */
-        flex: 1 1 auto;
+        flex: 0 1 auto;
         display: flex;
         flex-direction: row;
         overflow-x: auto;
@@ -192,7 +192,7 @@ header {
           -webkit-transform:rotateX(180deg); /* Safari and Chrome */
           width: auto;
           text-align: center;
-          flex: 1 0 auto;
+          flex: 0 0 auto;
         }
       }
       .project {
