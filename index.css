@@ -2264,7 +2264,8 @@ header {
 #biography {
   margin: 48px auto 48px auto;
   max-width: 600px;
-  padding: 0px 16px 0px 16px; }
+  padding: 0px 16px 0px 16px;
+  background-color: #333333; }
   #biography p {
     font-size: 16px;
     color: #dbdbdb; }
@@ -2342,7 +2343,8 @@ header {
         flex: 1 1 auto;
         display: flex;
         flex-direction: row;
-        overflow: auto; }
+        overflow-x: auto;
+        overflow-y: hidden; }
         .edge-grabber section nav button {
           transform: rotateX(180deg);
           -ms-transform: rotateX(180deg);
@@ -2351,14 +2353,15 @@ header {
           /* Safari and Chrome */
           width: auto;
           text-align: center;
-          flex: 1 auto; }
+          flex: 1 0 auto; }
       .edge-grabber section .project {
         flex: 1 0 500px; } }
 
 #contact {
   max-width: 600px;
   margin: 48px auto 48px auto;
-  padding: 0px 16px 0px 16px; }
+  padding: 0px 16px 0px 16px;
+  background-color: #333333; }
   #contact > div {
     font-size: 16px;
     margin: 16px 0px 16px 0px; }

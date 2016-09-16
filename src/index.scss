@@ -97,6 +97,7 @@ header {
     margin: $buffer-huge auto $buffer-huge auto;
     max-width: 600px;
     padding: 0px $buffer-small 0px $buffer-small;
+    background-color: $grey-light;
     p {
       font-size: $font-large;
       color: $white-light;
@@ -176,21 +177,21 @@ header {
       flex-direction: column;
       width: 100%;
       nav {
-
         transform:rotateX(180deg);
         -ms-transform:rotateX(180deg); /* IE 9 */
         -webkit-transform:rotateX(180deg); /* Safari and Chrome */
         flex: 1 1 auto;
         display: flex;
         flex-direction: row;
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         button {
           transform:rotateX(180deg);
           -ms-transform:rotateX(180deg); /* IE 9 */
           -webkit-transform:rotateX(180deg); /* Safari and Chrome */
           width: auto;
           text-align: center;
-          flex: 1 auto;
+          flex: 1 0 auto;
         }
       }
       .project {
@@ -204,6 +205,7 @@ header {
   max-width: 600px;
   margin: $buffer-huge auto $buffer-huge auto;
   padding: 0px $buffer-small 0px $buffer-small;
+  background-color: $grey-light;
   //text-align: center;
   >div {
     font-size: $font-base;
